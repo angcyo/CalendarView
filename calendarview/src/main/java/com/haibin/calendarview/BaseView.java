@@ -26,9 +26,9 @@ import android.view.View;
 import android.view.ViewParent;
 import android.widget.LinearLayout;
 
-import androidx.annotation.Nullable;
-
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 /**
  * 基本的日历View，派生出MonthView 和 WeekView
@@ -134,7 +134,9 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
      */
     boolean isClick = true;
 
-    /**手势是否按下*/
+    /**
+     * 手势是否按下
+     */
     protected boolean isTouchDown = false;
 
     /**
@@ -466,6 +468,14 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
         return mDelegate != null ? mDelegate.getCalendarPaddingRight() : 0;
     }
 
+    protected Calendar getMaxRangeCalendar() {
+        return mDelegate == null ? null : mDelegate.getMaxRangeCalendar();
+    }
+
+    protected Calendar getMinRangeCalendar() {
+        return mDelegate == null ? null : mDelegate.getMinRangeCalendar();
+    }
+    
 
     /**
      * 初始化画笔相关
