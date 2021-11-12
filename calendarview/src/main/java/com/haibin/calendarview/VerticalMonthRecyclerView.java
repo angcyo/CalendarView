@@ -195,6 +195,17 @@ public class VerticalMonthRecyclerView extends RecyclerView {
         calendar.setYear(year);
         calendar.setMonth(month);
         calendar.setDay(day);
+        if (!calendar.isAvailable()) {
+            return;
+        }
+        if (!isInRange(calendar)) {
+            return;
+        }
+        if (mDelegate.mCalendarInterceptListener != null &&
+                mDelegate.mCalendarInterceptListener.onCalendarIntercept(calendar)) {
+            mDelegate.mCalendarInterceptListener.onCalendarInterceptClick(calendar, false);
+            return;
+        }
         calendar.setCurrentDay(calendar.equals(mDelegate.getCurrentDay()));
         LunarCalendar.setupLunarCalendar(calendar);
         mDelegate.mIndexCalendar = calendar;
@@ -206,6 +217,16 @@ public class VerticalMonthRecyclerView extends RecyclerView {
         updateSelected();
     }
 
+    /**
+     * 是否在日期范围内
+     *
+     * @param calendar calendar
+     * @return 是否在日期范围内
+     */
+    protected final boolean isInRange(Calendar calendar) {
+        return mDelegate != null && CalendarUtil.isCalendarInRange(calendar, mDelegate);
+    }
+    
     /**
      * 更新月视图Class
      */

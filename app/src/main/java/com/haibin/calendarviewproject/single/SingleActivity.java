@@ -3,7 +3,6 @@ package com.haibin.calendarviewproject.single;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -25,6 +24,8 @@ import com.haibin.calendarviewproject.simple.SimpleActivity;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class SingleActivity extends BaseActivity implements
         CalendarView.OnCalendarSelectListener,
