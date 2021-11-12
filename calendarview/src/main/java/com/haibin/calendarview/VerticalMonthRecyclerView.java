@@ -159,6 +159,7 @@ public class VerticalMonthRecyclerView extends RecyclerView {
                 scrollToPosition(position);
             }
         }
+        updateSelected();
     }
 
     public void scrollToNext(boolean smoothScroll) {
