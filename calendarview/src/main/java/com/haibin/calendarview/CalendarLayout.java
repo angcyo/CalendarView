@@ -515,7 +515,7 @@ public class CalendarLayout extends LinearLayout {
                     return false;
                 }
 
-                if (Math.abs(dy) > Math.abs(dx) ) { //纵向滑动距离大于横向滑动距离,拦截滑动事件
+                if (Math.abs(dy) > Math.abs(dx)) { //纵向滑动距离大于横向滑动距离,拦截滑动事件
                     if ((dy > 0 && mContentView.getTranslationY() <= 0)
                             || (dy < 0 && mContentView.getTranslationY() >= -mContentViewTranslateY)) {
                         mLastY = y;
@@ -676,7 +676,7 @@ public class CalendarLayout extends LinearLayout {
      * @return isExpand
      */
     public final boolean isExpand() {
-        return mMonthView.getVisibility() == VISIBLE;
+        return mMonthView != null && mMonthView.getVisibility() == VISIBLE;
     }
 
 
@@ -696,7 +696,7 @@ public class CalendarLayout extends LinearLayout {
                 mCalendarShowMode == CALENDAR_SHOW_MODE_ONLY_WEEK_VIEW ||
                 mContentView == null)
             return false;
-        if (mMonthView.getVisibility() != VISIBLE) {
+        if (mMonthView != null && mMonthView.getVisibility() != VISIBLE) {
             mWeekPager.setVisibility(GONE);
             onShowMonthView();
             isWeekView = false;
@@ -710,7 +710,9 @@ public class CalendarLayout extends LinearLayout {
             public void onAnimationUpdate(ValueAnimator animation) {
                 float currentValue = (Float) animation.getAnimatedValue();
                 float percent = currentValue * 1.0f / mContentViewTranslateY;
-                mMonthView.setTranslationY(mViewPagerTranslateY * percent);
+                if (mMonthView != null) {
+                    mMonthView.setTranslationY(mViewPagerTranslateY * percent);
+                }
                 isAnimating = true;
             }
         });
