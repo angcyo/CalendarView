@@ -70,7 +70,7 @@ public abstract class RangeMonthView extends BaseMonthView {
      * @param i        i
      * @param j        j
      */
-    private void draw(Canvas canvas, Calendar calendar, int calendarIndex, int i, int j) {
+    protected void draw(Canvas canvas, Calendar calendar, int calendarIndex, int i, int j) {
         int x = j * mItemWidth + mDelegate.getCalendarPaddingLeft();
         int y = i * mItemHeight;
         onLoopStart(x, y);
@@ -220,7 +220,7 @@ public abstract class RangeMonthView extends BaseMonthView {
      * @param calendarIndex 当前位置
      * @return 上一个日期是否选中
      */
-    protected final boolean isSelectPreCalendar(Calendar calendar, int calendarIndex) {
+    protected boolean isSelectPreCalendar(Calendar calendar, int calendarIndex) {
 
         Calendar preCalendar;
         if (calendarIndex == 0) {
@@ -241,7 +241,7 @@ public abstract class RangeMonthView extends BaseMonthView {
      * @param calendarIndex 当前位置
      * @return 下一个日期是否选中
      */
-    protected final boolean isSelectNextCalendar(Calendar calendar, int calendarIndex) {
+    protected boolean isSelectNextCalendar(Calendar calendar, int calendarIndex) {
 
         Calendar nextCalendar;
         if (calendarIndex == mItems.size() - 1) {

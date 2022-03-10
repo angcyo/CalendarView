@@ -38,7 +38,7 @@ import java.util.List;
 public final class WeekViewPager extends ViewPager {
     private boolean isUpdateWeekView;
     private int mWeekCount;
-    private CalendarViewDelegate mDelegate;
+    public CalendarViewDelegate mDelegate;
 
     /**
      * 日历布局，需要在日历下方放自己的布局

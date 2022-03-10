@@ -65,12 +65,12 @@ public class CalendarViewDelegate {
      */
     static final int LAST_MONTH_VIEW_SELECT_DAY_IGNORE_CURRENT = 2;
 
-    private int mDefaultCalendarSelectDay;
+    public int mDefaultCalendarSelectDay;
 
     /**
      * 周起始
      */
-    private int mWeekStart;
+    public int mWeekStart;
 
     /**
      * 全部显示
@@ -89,7 +89,7 @@ public class CalendarViewDelegate {
     /**
      * 月份显示模式
      */
-    private int mMonthViewShowMode;
+    public int mMonthViewShowMode;
 
 
     /**
@@ -115,7 +115,7 @@ public class CalendarViewDelegate {
     /**
      * 选择模式
      */
-    private int mSelectMode;
+    public int mSelectMode;
 
 
     /**
@@ -276,19 +276,19 @@ public class CalendarViewDelegate {
     /**
      * 最小年份和最大年份
      */
-    private int mMinYear, mMaxYear;
+    public int mMinYear, mMaxYear;
 
     /**
      * 最小年份和最大年份对应最小月份和最大月份
      * when you want set 2015-07 to 2017-08
      */
-    private int mMinYearMonth, mMaxYearMonth;
+    public int mMinYearMonth, mMaxYearMonth;
 
     /**
      * 最小年份和最大年份对应最小天和最大天数
      * when you want set like 2015-07-08 to 2017-08-30
      */
-    private int mMinYearDay, mMaxYearDay;
+    public int mMinYearDay, mMaxYearDay;
 
     /**
      * 日期和农历文本大小
@@ -313,7 +313,7 @@ public class CalendarViewDelegate {
     /**
      * 今天的日子
      */
-    private Calendar mCurrentDate;
+    public Calendar mCurrentDate;
 
 
     private boolean mMonthViewScrollable,
@@ -403,12 +403,12 @@ public class CalendarViewDelegate {
     /**
      * 保存选中的日期
      */
-    Calendar mSelectedCalendar;
+    public Calendar mSelectedCalendar;
 
     /**
      * 保存标记位置
      */
-    Calendar mIndexCalendar;
+    public Calendar mIndexCalendar;
 
     /**
      * 多选日历
@@ -964,7 +964,7 @@ public class CalendarViewDelegate {
         }
     }
 
-    Calendar getCurrentDay() {
+    public Calendar getCurrentDay() {
         return mCurrentDate;
     }
 
