@@ -40,5 +40,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     testImplementation 'junit:junit:4.13.2'
+
+    implementation 'com.github.donkingliang:GroupedRecyclerViewAdapter:2.4.1'
 }
 //apply from: '../script/gradle-jcenter-push.gradle'

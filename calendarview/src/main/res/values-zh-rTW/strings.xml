@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="cv_app_name">CalendarView</string>
     <string-array name="lunar_first_of_month">
-        <item>春節</item>
+        <item>正月</item>
         <item>二月</item>
         <item>三月</item>
         <item>四月</item>
@@ -78,7 +78,6 @@
         <item>0928教師節</item>
         <item>1001國慶節</item>
         <item>1031萬聖節</item>
-        <item>1111光棍節</item>
         <item>1224平安夜</item>
         <item>1225聖誕節</item>
     </string-array>

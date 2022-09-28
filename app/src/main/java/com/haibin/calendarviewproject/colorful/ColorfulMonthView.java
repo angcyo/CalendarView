@@ -13,7 +13,7 @@ import com.haibin.calendarview.MonthView;
 
 public class ColorfulMonthView extends MonthView {
 
-    private int mRadius;
+    private float mRadius;
 
     public ColorfulMonthView(Context context) {
         super(context);
@@ -21,7 +21,7 @@ public class ColorfulMonthView extends MonthView {
 
     @Override
     protected void onPreviewHook() {
-        mRadius = Math.min(mItemWidth, mItemHeight) / 5 * 2;
+        mRadius = (Math.min(mItemWidth, mItemHeight) / 5 * 2);
     }
 
     /**
@@ -35,25 +35,25 @@ public class ColorfulMonthView extends MonthView {
      * @return false 则不绘制onDrawScheme，因为这里背景色是互斥的
      */
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme) {
-        int cx = x + mItemWidth / 2;
-        int cy = y + mItemHeight / 2;
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme) {
+        float cx = x + mItemWidth / 2;
+        float cy = y + mItemHeight / 2;
         canvas.drawCircle(cx, cy, mRadius, mSelectedPaint);
         return true;
     }
 
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y) {
-        int cx = x + mItemWidth / 2;
-        int cy = y + mItemHeight / 2;
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x, float y) {
+        float cx = x + mItemWidth / 2;
+        float cy = y + mItemHeight / 2;
         canvas.drawCircle(cx, cy, mRadius, mSchemePaint);
     }
 
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected) {
-        int cx = x + mItemWidth / 2;
-        int top = y - mItemHeight / 8;
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme, boolean isSelected) {
+        float cx = x + mItemWidth / 2;
+        float top = y - mItemHeight / 8;
         if (isSelected) {
             canvas.drawText(String.valueOf(calendar.getDay()), cx, mTextBaseLine + top,
                     calendar.isCurrentDay() ? mCurDayTextPaint : mSelectTextPaint);

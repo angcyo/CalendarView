@@ -102,7 +102,7 @@ public final class CalendarUtil {
         return (preDiff + monthDayCount + nextDiff) / 7;
     }
 
-    private static int getMonthViewHeight(CalendarViewDelegate delegate, int year, int month, int itemHeight, int weekStartWith) {
+    private static float getMonthViewHeight(CalendarViewDelegate delegate, int year, int month, float itemHeight, int weekStartWith) {
         java.util.Calendar date = java.util.Calendar.getInstance();
         date.set(year, month - 1, 1, 12, 0, 0);
         int preDiff = getMonthViewStartDiff(year, month, weekStartWith);
@@ -111,7 +111,7 @@ public final class CalendarUtil {
         return (preDiff + monthDaysCount + nextDiff) / 7 * itemHeight;
     }
 
-    private static int getMonthViewHeightWeekMode(CalendarViewDelegate delegate, int year, int month, int itemHeight, int weekStartWith) {
+    private static int getMonthViewHeightWeekMode(CalendarViewDelegate delegate, int year, int month, float itemHeight, int weekStartWith) {
         int preDiff = getMonthCurrentDayStartDiff(delegate, year, month, weekStartWith);
         int monthDaysCount = delegate.mCurrentDate.getDay();
         int nextDiff = getMonthCurrentDayEndDiff(delegate, year, month, weekStartWith);
@@ -128,7 +128,7 @@ public final class CalendarUtil {
      * @param weekStartWith 周起始
      * @return 不需要多余行的高度
      */
-    public static int calcMonthViewHeight(int year, int month, int itemHeight, CalendarViewDelegate delegate) {
+    public static float calcMonthViewHeight(int year, int month, float itemHeight, CalendarViewDelegate delegate) {
         int weekStartWith = delegate.getWeekStart();
         boolean isCurrentMonth = CalendarUtil.isCurrentMonth(delegate, year, month);
         boolean priorityWeekMode = delegate.monthPriorityShowWeekMode && isCurrentMonth;
@@ -149,7 +149,7 @@ public final class CalendarUtil {
      * @param mode          mode
      * @return 不需要多余行的高度
      */
-    public static int getMonthViewHeight(int year, int month, int itemHeight, int weekStartWith, CalendarViewDelegate delegate) {
+    public static float getMonthViewHeight(int year, int month, float itemHeight, int weekStartWith, CalendarViewDelegate delegate) {
         int mode = delegate.getMonthViewShowMode();
         boolean isCurrentMonth = CalendarUtil.isCurrentMonth(delegate, year, month);
         boolean priorityWeekMode = delegate.monthPriorityShowWeekMode && isCurrentMonth;

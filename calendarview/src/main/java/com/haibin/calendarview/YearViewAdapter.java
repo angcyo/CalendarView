@@ -26,7 +26,8 @@ import java.lang.reflect.Constructor;
 
 final class YearViewAdapter extends BaseRecyclerAdapter<Month> {
     private CalendarViewDelegate mDelegate;
-    private int mItemWidth, mItemHeight;
+    private float mItemWidth;
+    private float mItemHeight;
 
     YearViewAdapter(Context context) {
         super(context);

@@ -47,7 +47,7 @@ public class CustomYearView extends YearView {
     }
 
     @Override
-    protected void onDrawMonth(Canvas canvas, int year, int month, int x, int y, int width, int height) {
+    protected void onDrawMonth(Canvas canvas, int year, int month, float x, float y, float width, float height) {
 
         String text = getContext()
                 .getResources()
@@ -82,7 +82,7 @@ public class CustomYearView extends YearView {
 
 
     @Override
-    protected void onDrawWeek(Canvas canvas, int week, int x, int y, int width, int height) {
+    protected void onDrawWeek(Canvas canvas, int week, float x, float y, float width, float height) {
         String text = getContext().getResources().getStringArray(com.haibin.calendarview.R.array.year_view_week_string_array)[week];
         canvas.drawText(text,
                 x + width / 2,
@@ -92,23 +92,23 @@ public class CustomYearView extends YearView {
 
 
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme) {
-        int cx = x + mItemWidth / 2;
-        int cy = y + mItemHeight / 2;
-        int radius = Math.min(mItemWidth, mItemHeight) / 8 * 5;
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme) {
+        float cx = x + mItemWidth / 2;
+        float cy = y + mItemHeight / 2;
+        float radius = Math.min(mItemWidth, mItemHeight) / 8 * 5;
         canvas.drawCircle(cx, cy, radius, mSelectedPaint);
         return true;
     }
 
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y) {
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x, float y) {
 
     }
 
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected) {
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme, boolean isSelected) {
         float baselineY = mTextBaseLine + y;
-        int cx = x + mItemWidth / 2;
+        float cx = x + mItemWidth / 2;
 
         if (isSelected) {
             canvas.drawText(String.valueOf(calendar.getDay()),

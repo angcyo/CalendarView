@@ -43,6 +43,12 @@ public class FullMonthView extends MonthView {
         mSelectedPaint.setMaskFilter(new BlurMaskFilter(50, BlurMaskFilter.Blur.SOLID));
     }
 
+    @Override
+    protected void drawCalendar(Canvas canvas, Calendar calendar, float x, float y, boolean isSelected) {
+        canvas.drawRect(x, y, x + mItemWidth, y + mItemHeight, mRectPaint);
+        super.drawCalendar(canvas, calendar, x, y, isSelected);
+    }
+
     /**
      * 绘制选中的日子
      *
@@ -54,8 +60,8 @@ public class FullMonthView extends MonthView {
      * @return true 则绘制onDrawScheme，因为这里背景色不是是互斥的
      */
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme) {
-        canvas.drawRect(x, y , x + mItemWidth, y + mItemHeight, mSelectedPaint);
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme) {
+        canvas.drawRect(x, y, x + mItemWidth, y + mItemHeight, mSelectedPaint);
         return true;
     }
 
@@ -69,24 +75,29 @@ public class FullMonthView extends MonthView {
      */
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y) {
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x, float y) {
         mSchemeBasicPaint.setColor(calendar.getSchemeColor());
         List<Calendar.Scheme> schemes = calendar.getSchemes();
         if (schemes == null || schemes.size() == 0) {
             return;
         }
         int space = dipToPx(getContext(), 2);
-        int indexY = y + mItemHeight - 2 * space;
+        float indexY = y + mItemHeight - 2 * space;
         int sw = dipToPx(getContext(), mItemWidth / 10);
         int sh = dipToPx(getContext(), 4);
+        //for (Calendar.Scheme scheme : schemes) {
+        //
+        //    mSchemePaint.setColor(scheme.getShcemeColor());
+        //
+        //    canvas.drawRect(x + mItemWidth - sw -  2 * space,
+        //
+        //            indexY - sh, x + mItemWidth - 2 * space, indexY, mSchemePaint);
+        //    indexY = indexY - space -sh;
+        //}
         for (Calendar.Scheme scheme : schemes) {
-
             mSchemePaint.setColor(scheme.getShcemeColor());
-
-            canvas.drawRect(x + mItemWidth - sw -  2 * space,
-
-                    indexY - sh, x + mItemWidth - 2 * space, indexY, mSchemePaint);
-            indexY = indexY - space -sh;
+            canvas.drawRect(x, indexY - sh, x + mItemWidth, indexY, mSchemePaint);
+            indexY = indexY - space - sh;
         }
     }
 
@@ -102,10 +113,9 @@ public class FullMonthView extends MonthView {
      */
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected) {
-        canvas.drawRect(x, y, x + mItemWidth, y + mItemHeight, mRectPaint);
-        int cx = x + mItemWidth / 2;
-        int top = y - mItemHeight / 6;
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme, boolean isSelected) {
+        float cx = x + mItemWidth / 2;
+        float top = y - mItemHeight / 6;
 
         boolean isInRange = isInRange(calendar);
 

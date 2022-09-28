@@ -44,7 +44,7 @@ public abstract class MultiWeekView extends BaseWeekView {
         onPreviewHook();
 
         for (int i = 0; i < 7; i++) {
-            int x = i * mItemWidth + mDelegate.getCalendarPaddingLeft();
+            float x = i * mItemWidth + mDelegate.getCalendarPaddingLeft();
             onLoopStart(x);
             Calendar calendar = mItems.get(i);
             boolean isSelected = isCalendarSelected(calendar);
@@ -189,7 +189,7 @@ public abstract class MultiWeekView extends BaseWeekView {
      * @param isSelectedNext 下一个日期是否选中
      * @return 是否绘制 onDrawScheme
      */
-    protected abstract boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, boolean hasScheme,
+    protected abstract boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, boolean hasScheme,
                                               boolean isSelectedPre, boolean isSelectedNext);
 
     /**
@@ -200,7 +200,7 @@ public abstract class MultiWeekView extends BaseWeekView {
      * @param x          日历Card x起点坐标
      * @param isSelected 是否选中
      */
-    protected abstract void onDrawScheme(Canvas canvas, Calendar calendar, int x, boolean isSelected);
+    protected abstract void onDrawScheme(Canvas canvas, Calendar calendar, float x, boolean isSelected);
 
 
     /**
@@ -212,5 +212,5 @@ public abstract class MultiWeekView extends BaseWeekView {
      * @param hasScheme  是否是标记的日期
      * @param isSelected 是否选中
      */
-    protected abstract void onDrawText(Canvas canvas, Calendar calendar, int x, boolean hasScheme, boolean isSelected);
+    protected abstract void onDrawText(Canvas canvas, Calendar calendar, float x, boolean hasScheme, boolean isSelected);
 }

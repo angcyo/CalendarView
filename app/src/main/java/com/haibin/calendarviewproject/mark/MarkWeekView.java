@@ -25,17 +25,17 @@ public class MarkWeekView extends WeekView {
     }
 
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, boolean hasScheme) {
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, boolean hasScheme) {
         return markProperty.onDrawSelected(this, canvas, calendar, x, 0, hasScheme);
     }
 
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x) {
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x) {
         markProperty.onDrawScheme(this, canvas, calendar, x, 0);
     }
 
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, boolean hasScheme, boolean isSelected) {
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, boolean hasScheme, boolean isSelected) {
         markProperty.onDrawText(this, canvas, calendar, x, 0, hasScheme, isSelected);
     }
 }

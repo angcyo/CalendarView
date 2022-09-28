@@ -32,7 +32,7 @@ public class IndexMonthView extends MonthView {
 
 
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme) {
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme) {
         mSelectedPaint.setStyle(Paint.Style.FILL);
         canvas.drawRect(x + mPadding, y + mPadding, x + mItemWidth - mPadding, y + mItemHeight - mPadding, mSelectedPaint);
         return true;
@@ -47,7 +47,7 @@ public class IndexMonthView extends MonthView {
      */
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y) {
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x, float y) {
         mSchemeBasicPaint.setColor(calendar.getSchemeColor());
         canvas.drawRect(x + mItemWidth / 2 - mW / 2,
                 y + mItemHeight - mH * 2 - mPadding,
@@ -57,9 +57,9 @@ public class IndexMonthView extends MonthView {
 
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected) {
-        int cx = x + mItemWidth / 2;
-        int top = y - mItemHeight / 6;
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme, boolean isSelected) {
+        float cx = x + mItemWidth / 2;
+        float top = y - mItemHeight / 6;
         if (hasScheme) {
             canvas.drawText(String.valueOf(calendar.getDay()), cx, mTextBaseLine + top,
                     calendar.isCurrentDay() ? mCurDayTextPaint :

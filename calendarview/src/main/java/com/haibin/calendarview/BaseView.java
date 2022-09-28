@@ -114,12 +114,12 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
     /**
      * 每一项的高度
      */
-    public int mItemHeight;
+    public float mItemHeight;
 
     /**
      * 每一项的宽度
      */
-    public int mItemWidth;
+    public float mItemWidth;
 
     /**
      * Text的基线
@@ -461,12 +461,12 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
     }
 
 
-    protected int getCalendarPaddingLeft() {
+    protected float getCalendarPaddingLeft() {
         return mDelegate != null ? mDelegate.getCalendarPaddingLeft() : 0;
     }
 
 
-    protected int getCalendarPaddingRight() {
+    protected float getCalendarPaddingRight() {
         return mDelegate != null ? mDelegate.getCalendarPaddingRight() : 0;
     }
 

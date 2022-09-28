@@ -61,7 +61,7 @@ public class DefaultWeekView extends WeekView {
      * @return true 则绘制onDrawScheme，因为这里背景色不是是互斥的
      */
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, boolean hasScheme) {
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, boolean hasScheme) {
         mSelectedPaint.setStyle(Paint.Style.FILL);
         canvas.drawRect(x + mPadding, mPadding, x + mItemWidth - mPadding, mItemHeight - mPadding, mSelectedPaint);
         return true;
@@ -69,7 +69,7 @@ public class DefaultWeekView extends WeekView {
 
 
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x) {
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x) {
         mSchemeBasicPaint.setColor(calendar.getSchemeColor());
 
         canvas.drawCircle(x + mItemWidth - mPadding - mRadio / 2, mPadding + mRadio, mRadio, mSchemeBasicPaint);
@@ -91,9 +91,9 @@ public class DefaultWeekView extends WeekView {
 
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, boolean hasScheme, boolean isSelected) {
-        int cx = x + mItemWidth / 2;
-        int top = -mItemHeight / 6;
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, boolean hasScheme, boolean isSelected) {
+        float cx = x + mItemWidth / 2;
+        float top = -mItemHeight / 6;
 
         if (isSelected) {
             canvas.drawText(String.valueOf(calendar.getDay()), cx, mTextBaseLine + top,

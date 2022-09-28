@@ -15,10 +15,10 @@ import android.view.animation.OvershootInterpolator;
  */
 public class MonthAnimHelper extends AnimatorListenerAdapter implements ValueAnimator.AnimatorUpdateListener {
 
-    int startX = 0;
-    int endX = 0;
-    int startY = 0;
-    int endY = 0;
+    float startX = 0;
+    float endX = 0;
+    float startY = 0;
+    float endY = 0;
     Calendar calendar;
     ValueAnimator animator;
     MonthView monthView;

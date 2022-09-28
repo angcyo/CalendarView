@@ -44,7 +44,7 @@ public abstract class WeekView extends BaseWeekView {
         onPreviewHook();
 
         for (int i = 0; i < mItems.size(); i++) {
-            int x = i * mItemWidth + mDelegate.getCalendarPaddingLeft();
+            float x = i * mItemWidth + mDelegate.getCalendarPaddingLeft();
             boolean isSelected = i == mCurrentItem;
             if (weekAnimHelper != null && weekAnimHelper.isStarted()) {
                 if (weekAnimHelper.calendar == mItems.get(mCurrentItem)) {
@@ -62,7 +62,7 @@ public abstract class WeekView extends BaseWeekView {
         }
     }
 
-    protected void drawCalendar(Canvas canvas, Calendar calendar, int x, boolean isSelected) {
+    protected void drawCalendar(Canvas canvas, Calendar calendar, float x, boolean isSelected) {
         onLoopStart(x);
         boolean hasScheme = calendar.hasScheme();
         if (hasScheme) {
@@ -209,7 +209,7 @@ public abstract class WeekView extends BaseWeekView {
      * @param hasScheme hasScheme 非标记的日期
      * @return 是否绘制 onDrawScheme
      */
-    protected abstract boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, boolean hasScheme);
+    protected abstract boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, boolean hasScheme);
 
     /**
      * 绘制标记的日期
@@ -218,7 +218,7 @@ public abstract class WeekView extends BaseWeekView {
      * @param calendar 日历calendar
      * @param x        日历Card x起点坐标
      */
-    protected abstract void onDrawScheme(Canvas canvas, Calendar calendar, int x);
+    protected abstract void onDrawScheme(Canvas canvas, Calendar calendar, float x);
 
 
     /**
@@ -230,5 +230,5 @@ public abstract class WeekView extends BaseWeekView {
      * @param hasScheme  是否是标记的日期
      * @param isSelected 是否选中
      */
-    protected abstract void onDrawText(Canvas canvas, Calendar calendar, int x, boolean hasScheme, boolean isSelected);
+    protected abstract void onDrawText(Canvas canvas, Calendar calendar, float x, boolean hasScheme, boolean isSelected);
 }

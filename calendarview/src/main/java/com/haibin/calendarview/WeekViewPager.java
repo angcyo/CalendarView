@@ -177,9 +177,9 @@ public final class WeekViewPager extends ViewPager {
     /**
      * 滚动到指定日期
      *
-     * @param year  年
-     * @param month 月
-     * @param day   日
+     * @param year           年
+     * @param month          月
+     * @param day            日
      * @param invokeListener 调用日期事件
      */
     void scrollToCalendar(int year, int month, int day, boolean smoothScroll, boolean invokeListener) {
@@ -425,7 +425,7 @@ public final class WeekViewPager extends ViewPager {
      */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        heightMeasureSpec = MeasureSpec.makeMeasureSpec(mDelegate.getCalendarItemHeight(), MeasureSpec.EXACTLY);
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec((int) mDelegate.getCalendarItemHeight(), MeasureSpec.EXACTLY);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 

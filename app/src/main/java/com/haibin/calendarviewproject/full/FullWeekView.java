@@ -48,7 +48,7 @@ public class FullWeekView extends WeekView {
      * @return true 则绘制onDrawScheme，因为这里背景色不是是互斥的
      */
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, boolean hasScheme) {
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, boolean hasScheme) {
         mSelectedPaint.setStyle(Paint.Style.FILL);
         canvas.drawRect(x,0, x + mItemWidth, mItemHeight , mSelectedPaint);
         return true;
@@ -56,14 +56,14 @@ public class FullWeekView extends WeekView {
 
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x) {
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x) {
         mSchemeBasicPaint.setColor(calendar.getSchemeColor());
         List<Calendar.Scheme> schemes = calendar.getSchemes();
         if (schemes == null || schemes.size() == 0) {
             return;
         }
         int space = dipToPx(getContext(), 2);
-        int indexY = mItemHeight - 2 * space;
+        float indexY = mItemHeight - 2 * space;
         int sw = dipToPx(getContext(), mItemWidth / 10);
         int sh = dipToPx(getContext(), 4);
         for (Calendar.Scheme scheme : schemes) {
@@ -79,10 +79,10 @@ public class FullWeekView extends WeekView {
 
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, boolean hasScheme, boolean isSelected) {
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, boolean hasScheme, boolean isSelected) {
         canvas.drawRect(x, 0, x + mItemWidth,  mItemHeight, mRectPaint);
-        int cx = x + mItemWidth / 2;
-        int top = - mItemHeight / 6;
+        float cx = x + mItemWidth / 2;
+        float top = - mItemHeight / 6;
 
         boolean isInRange = isInRange(calendar);
 

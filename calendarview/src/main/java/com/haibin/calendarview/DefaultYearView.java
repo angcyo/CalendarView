@@ -34,7 +34,7 @@ public class DefaultYearView extends YearView {
 
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void onDrawMonth(Canvas canvas, int year, int month, int x, int y, int width, int height) {
+    protected void onDrawMonth(Canvas canvas, int year, int month, float x, float y, float width, float height) {
 
         String text = getContext()
                 .getResources()
@@ -48,7 +48,7 @@ public class DefaultYearView extends YearView {
 
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void onDrawWeek(Canvas canvas, int week, int x, int y, int width, int height) {
+    protected void onDrawWeek(Canvas canvas, int week, float x, float y, float width, float height) {
         String text = getContext().getResources().getStringArray(R.array.year_view_week_string_array)[week];
         canvas.drawText(text,
                 x + width / 2,
@@ -58,19 +58,19 @@ public class DefaultYearView extends YearView {
 
 
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme) {
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme) {
         return false;
     }
 
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y) {
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x, float y) {
 
     }
 
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected) {
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme, boolean isSelected) {
         float baselineY = mTextBaseLine + y;
-        int cx = x + mItemWidth / 2;
+        float cx = x + mItemWidth / 2;
 
         if (isSelected) {
             canvas.drawText(String.valueOf(calendar.getDay()),

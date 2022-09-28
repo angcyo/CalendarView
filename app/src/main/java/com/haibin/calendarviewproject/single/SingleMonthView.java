@@ -16,9 +16,9 @@ import com.haibin.calendarview.MonthView;
 
 public class SingleMonthView extends MonthView {
 
-    private int mRadius;
+    private float mRadius;
     private Paint mRingPaint = new Paint();
-    private int mRingRadius;
+    private float mRingRadius;
 
     /**
      * 不可用画笔
@@ -64,10 +64,10 @@ public class SingleMonthView extends MonthView {
      * @return false 则不绘制onDrawScheme，因为这里背景色是互斥的
      */
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme) {
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme) {
 
-        int cx = x + mItemWidth / 2;
-        int cy = y + mItemHeight / 2;
+        float cx = x + mItemWidth / 2;
+        float cy = y + mItemHeight / 2;
 
         canvas.drawCircle(cx, cy, mRadius, mSelectedPaint);
         canvas.drawCircle(cx, cy, mRingRadius, mRingPaint);
@@ -76,16 +76,16 @@ public class SingleMonthView extends MonthView {
     }
 
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y) {
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x, float y) {
 //        int cx = x + mItemWidth / 2;
 //        int cy = y + mItemHeight / 2;
         //canvas.drawCircle(cx, cy, mRadius, mSchemePaint);
     }
 
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected) {
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme, boolean isSelected) {
         float baselineY = mTextBaseLine + y - dipToPx(getContext(),1);
-        int cx = x + mItemWidth / 2;
+        float cx = x + mItemWidth / 2;
         if (isSelected) {
             canvas.drawText(calendar.isCurrentDay() ? "今" : "选",
                     cx,

@@ -13,7 +13,7 @@ import com.haibin.calendarview.WeekView;
  */
 
 public class SimpleWeekView extends WeekView {
-    private int mRadius;
+    private float mRadius;
 
 
     public SimpleWeekView(Context context) {
@@ -27,24 +27,24 @@ public class SimpleWeekView extends WeekView {
     }
 
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, boolean hasScheme) {
-        int cx = x + mItemWidth / 2;
-        int cy = mItemHeight / 2;
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, boolean hasScheme) {
+        float cx = x + mItemWidth / 2;
+        float cy = mItemHeight / 2;
         canvas.drawCircle(cx, cy, mRadius, mSelectedPaint);
         return false;
     }
 
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x) {
-        int cx = x + mItemWidth / 2;
-        int cy = mItemHeight / 2;
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x) {
+        float cx = x + mItemWidth / 2;
+        float cy = mItemHeight / 2;
         canvas.drawCircle(cx, cy, mRadius, mSchemePaint);
     }
 
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, boolean hasScheme, boolean isSelected) {
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, boolean hasScheme, boolean isSelected) {
         float baselineY = mTextBaseLine;
-        int cx = x + mItemWidth / 2;
+        float cx = x + mItemWidth / 2;
         if (isSelected) {
             canvas.drawText(String.valueOf(calendar.getDay()),
                     cx,

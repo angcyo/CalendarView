@@ -17,7 +17,7 @@ import com.haibin.calendarview.WeekView;
 public class CustomWeekView extends WeekView {
 
 
-    private int mRadius;
+    private float mRadius;
 
     /**
      * 自定义魅族标记的文本画笔
@@ -105,9 +105,9 @@ public class CustomWeekView extends WeekView {
 
 
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, boolean hasScheme) {
-        int cx = x + mItemWidth / 2;
-        int cy = mItemHeight / 2;
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, boolean hasScheme) {
+        float cx = x + mItemWidth / 2;
+        float cy = mItemHeight / 2;
 
         if (isTouchDown && mCurrentItem == mItems.indexOf(getIndex())) {
             //点击当前选中的item, 缩放效果提示
@@ -121,7 +121,7 @@ public class CustomWeekView extends WeekView {
 
 
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x) {
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x) {
 
         boolean isSelected = isSelected(calendar);
         if (isSelected) {
@@ -135,10 +135,10 @@ public class CustomWeekView extends WeekView {
 
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, boolean hasScheme, boolean isSelected) {
-        int cx = x + mItemWidth / 2;
-        int cy = mItemHeight / 2;
-        int top = -mItemHeight / 6;
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, boolean hasScheme, boolean isSelected) {
+        float cx = x + mItemWidth / 2;
+        float cy = mItemHeight / 2;
+        float top = -mItemHeight / 6;
 
         if (calendar.isCurrentDay() && !isSelected) {
             canvas.drawCircle(cx, cy, mRadius, mCurrentDayPaint);

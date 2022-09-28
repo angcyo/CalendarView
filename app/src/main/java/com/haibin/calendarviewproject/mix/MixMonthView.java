@@ -17,7 +17,7 @@ import com.haibin.calendarview.MonthView;
 
 public class MixMonthView extends MonthView {
 
-    private int mRadius;
+    private float mRadius;
 
     /**
      * 自定义魅族标记的文本画笔
@@ -115,7 +115,7 @@ public class MixMonthView extends MonthView {
                 mYear, mMonth, CalendarUtil.getMonthDaysCount(mYear, mMonth), getWeekStartWith());
         int width = dipToPx(getContext(), 52);//left-padding
         int cx = width / 2;
-        int cy = 0;
+        float cy = 0;
 
         for (int w = weekStart; w <= weekEnd; w++) {
 
@@ -127,15 +127,15 @@ public class MixMonthView extends MonthView {
     }
 
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme) {
-        int cx = x + mItemWidth / 2;
-        int cy = y + mItemHeight / 2;
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme) {
+        float cx = x + mItemWidth / 2;
+        float cy = y + mItemHeight / 2;
         canvas.drawCircle(cx, cy, mRadius, mSelectedPaint);
         return true;
     }
 
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y) {
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x, float y) {
 
         boolean isSelected = isSelected(calendar);
         if (isSelected) {
@@ -149,10 +149,10 @@ public class MixMonthView extends MonthView {
 
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected) {
-        int cx = x + mItemWidth / 2;
-        int cy = y + mItemHeight / 2;
-        int top = y - mItemHeight / 6;
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme, boolean isSelected) {
+        float cx = x + mItemWidth / 2;
+        float cy = y + mItemHeight / 2;
+        float top = y - mItemHeight / 6;
 
         if (calendar.isCurrentDay() && !isSelected) {
             canvas.drawCircle(cx, cy, mRadius, mCurrentDayPaint);

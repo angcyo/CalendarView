@@ -121,17 +121,17 @@ public class CalendarLayout extends LinearLayout {
     /**
      * 默认手势
      */
-    private static final int GESTURE_MODE_DEFAULT = 0;
+    public static final int GESTURE_MODE_DEFAULT = 0;
 
 //       /**
     //     * 仅日历有效
     //     */
-//    private static final int GESTURE_MODE_ONLY_CALENDAR = 1;
+//    public static final int GESTURE_MODE_ONLY_CALENDAR = 1;
 
     /**
      * 禁用手势
      */
-    private static final int GESTURE_MODE_DISABLED = 2;
+    public static final int GESTURE_MODE_DISABLED = 2;
 
     /**
      * 手势模式
@@ -141,8 +141,8 @@ public class CalendarLayout extends LinearLayout {
 
     private int mCalendarShowMode;
 
-    private int mContentViewTranslateY; //ContentView  可滑动的最大距离距离 , 固定
-    private int mViewPagerTranslateY = 0;// ViewPager可以平移的距离，不代表mMonthView的平移距离
+    private float mContentViewTranslateY; //ContentView  可滑动的最大距离距离 , 固定
+    private float mViewPagerTranslateY = 0;// ViewPager可以平移的距离，不代表mMonthView的平移距离
 
     private float downY;
     private float mLastY;
@@ -160,7 +160,7 @@ public class CalendarLayout extends LinearLayout {
     private VelocityTracker mVelocityTracker;
     private int mMaximumVelocity;
 
-    private int mItemHeight;
+    private float mItemHeight;
 
     private CalendarViewDelegate mDelegate;
 
@@ -546,20 +546,20 @@ public class CalendarLayout extends LinearLayout {
 
         int year = mDelegate.mIndexCalendar.getYear();
         int month = mDelegate.mIndexCalendar.getMonth();
-        int weekBarHeight = CalendarUtil.dipToPx(getContext(), 1)
+        float weekBarHeight = CalendarUtil.dipToPx(getContext(), 1)
                 + mDelegate.getWeekBarHeight();
 
-        int monthHeight = CalendarUtil.getMonthViewHeight(year, month,
+        float monthHeight = CalendarUtil.getMonthViewHeight(year, month,
                 mDelegate.getCalendarItemHeight(),
                 mDelegate.getWeekStart(),
                 mDelegate)
                 + weekBarHeight;
 
-        int height = MeasureSpec.getSize(heightMeasureSpec);
+        float height = MeasureSpec.getSize(heightMeasureSpec);
 
         if (mDelegate.isFullScreenCalendar()) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-            int heightSpec = MeasureSpec.makeMeasureSpec(height - weekBarHeight - mDelegate.getCalendarItemHeight(),
+            int heightSpec = MeasureSpec.makeMeasureSpec((int) (height - weekBarHeight - mDelegate.getCalendarItemHeight()),
                     MeasureSpec.EXACTLY);
             mContentView.measure(widthMeasureSpec, heightSpec);
             mContentView.layout(mContentView.getLeft(), mContentView.getTop(), mContentView.getRight(), mContentView.getBottom());
@@ -568,14 +568,14 @@ public class CalendarLayout extends LinearLayout {
 
         if (monthHeight >= height && mMonthView.getHeight() > 0) {
             height = monthHeight;
-            heightMeasureSpec = MeasureSpec.makeMeasureSpec(monthHeight +
-                    weekBarHeight +
-                    mDelegate.getWeekBarHeight(), MeasureSpec.EXACTLY);
+            heightMeasureSpec = MeasureSpec.makeMeasureSpec(
+                    (int) (monthHeight + weekBarHeight + mDelegate.getWeekBarHeight()),
+                    MeasureSpec.EXACTLY);
         } else if (monthHeight < height && mMonthView.getHeight() > 0) {
-            heightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
+            heightMeasureSpec = MeasureSpec.makeMeasureSpec((int) height, MeasureSpec.EXACTLY);
         }
 
-        int h;
+        float h;
         if (mCalendarShowMode == CALENDAR_SHOW_MODE_ONLY_MONTH_VIEW ||
                 mCalendarView.getVisibility() == GONE) {
             h = height - (mCalendarView.getVisibility() == GONE ? 0 : mCalendarView.getHeight());
@@ -589,8 +589,7 @@ public class CalendarLayout extends LinearLayout {
             h = height - weekBarHeight - mItemHeight;
         }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int heightSpec = MeasureSpec.makeMeasureSpec(h,
-                MeasureSpec.EXACTLY);
+        int heightSpec = MeasureSpec.makeMeasureSpec((int) h, MeasureSpec.EXACTLY);
         mContentView.measure(widthMeasureSpec, heightSpec);
         mContentView.layout(mContentView.getLeft(), mContentView.getTop(), mContentView.getRight(), mContentView.getBottom());
     }
@@ -951,9 +950,13 @@ public class CalendarLayout extends LinearLayout {
 
 
     @SuppressWarnings("unused")
-    private int getCalendarViewHeight() {
+    private float getCalendarViewHeight() {
         return mMonthView.getVisibility() == VISIBLE ? mDelegate.getWeekBarHeight() + mMonthView.getHeight() :
                 mDelegate.getWeekBarHeight() + mDelegate.getCalendarItemHeight();
+    }
+
+    public void setGestureMode(int gestureMode) {
+        mGestureMode = gestureMode;
     }
 
     /**

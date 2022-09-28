@@ -25,17 +25,17 @@ public class MarkMonthView extends MonthView {
     }
 
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme) {
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme) {
         return markProperty.onDrawSelected(this, canvas, calendar, x, y, hasScheme);
     }
 
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y) {
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x, float y) {
         markProperty.onDrawScheme(this, canvas, calendar, x, y);
     }
 
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected) {
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme, boolean isSelected) {
         markProperty.onDrawText(this, canvas, calendar, x, y, hasScheme, isSelected);
     }
 }

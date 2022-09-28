@@ -115,12 +115,12 @@ public abstract class YearView extends View {
     /**
      * 每一项的高度
      */
-    protected int mItemHeight;
+    protected float mItemHeight;
 
     /**
      * 每一项的宽度
      */
-    protected int mItemWidth;
+    protected float mItemWidth;
 
     /**
      * Text的基线
@@ -294,17 +294,17 @@ public abstract class YearView extends View {
      * @param height height
      */
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
-    final void measureSize(int width, int height) {
+    final void measureSize(float width, float height) {
 
         Rect rect = new Rect();
         mCurMonthTextPaint.getTextBounds("1", 0, 1, rect);
         int textHeight = rect.height();
-        int mMinHeight = 12 * textHeight + getMonthViewTop();
+        float mMinHeight = 12 * textHeight + getMonthViewTop();
 
-        int h = height >= mMinHeight ? height : mMinHeight;
+        float h = height >= mMinHeight ? height : mMinHeight;
 
-        getLayoutParams().width = width;
-        getLayoutParams().height = h;
+        getLayoutParams().width = (int) width;
+        getLayoutParams().height = (int) h;
         mItemHeight = (h - getMonthViewTop()) / 6;
 
         Paint.FontMetrics metrics = mCurMonthTextPaint.getFontMetrics();
@@ -371,7 +371,7 @@ public abstract class YearView extends View {
                         mDelegate.getYearViewMonthPaddingTop());
     }
 
-    private int getMonthViewTop() {
+    private float getMonthViewTop() {
         return mDelegate.getYearViewMonthPaddingTop() +
                 mDelegate.getYearViewMonthHeight() +
                 mDelegate.getYearViewMonthPaddingBottom() +
@@ -391,7 +391,7 @@ public abstract class YearView extends View {
         if (week > 0) {
             week -= 1;
         }
-        int width = (getWidth() -
+        float width = (getWidth() -
                 mDelegate.getYearViewMonthPaddingLeft() -
                 mDelegate.getYearViewMonthPaddingRight()) / 7;
         for (int i = 0; i < 7; i++) {
@@ -447,8 +447,8 @@ public abstract class YearView extends View {
      * @param d        d
      */
     private void draw(Canvas canvas, Calendar calendar, int i, int j, int d) {
-        int x = j * mItemWidth + mDelegate.getYearViewMonthPaddingLeft();
-        int y = i * mItemHeight + getMonthViewTop();
+        float x = j * mItemWidth + mDelegate.getYearViewMonthPaddingLeft();
+        float y = i * mItemHeight + getMonthViewTop();
 
         boolean isSelected = calendar.equals(mDelegate.mSelectedCalendar);
         boolean hasScheme = calendar.hasScheme();
@@ -495,7 +495,7 @@ public abstract class YearView extends View {
      * @param width  width
      * @param height height
      */
-    protected abstract void onDrawMonth(Canvas canvas, int year, int month, int x, int y, int width, int height);
+    protected abstract void onDrawMonth(Canvas canvas, int year, int month, float x, float y, float width, float height);
 
 
     /**
@@ -508,7 +508,7 @@ public abstract class YearView extends View {
      * @param width  width
      * @param height height
      */
-    protected abstract void onDrawWeek(Canvas canvas, int week, int x, int y, int width, int height);
+    protected abstract void onDrawWeek(Canvas canvas, int week, float x, float y, float width, float height);
 
 
     /**
@@ -521,7 +521,7 @@ public abstract class YearView extends View {
      * @param hasScheme hasScheme 非标记的日期
      * @return 是否绘制onDrawScheme，true or false
      */
-    protected abstract boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme);
+    protected abstract boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme);
 
     /**
      * 绘制标记的日期,这里可以是背景色，标记色什么的
@@ -531,7 +531,7 @@ public abstract class YearView extends View {
      * @param x        日历Card x起点坐标
      * @param y        日历Card y起点坐标
      */
-    protected abstract void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y);
+    protected abstract void onDrawScheme(Canvas canvas, Calendar calendar, float x, float y);
 
 
     /**
@@ -544,5 +544,5 @@ public abstract class YearView extends View {
      * @param hasScheme  是否是标记的日期
      * @param isSelected 是否选中
      */
-    protected abstract void onDrawText(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected);
+    protected abstract void onDrawText(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme, boolean isSelected);
 }

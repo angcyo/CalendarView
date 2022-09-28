@@ -61,7 +61,7 @@ public class MeiZuMonthView extends MonthView {
      * @return true 则绘制onDrawScheme，因为这里背景色不是是互斥的
      */
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme) {
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme) {
         mSelectedPaint.setStyle(Paint.Style.FILL);
         canvas.drawRect(x + mPadding, y + mPadding, x + mItemWidth - mPadding, y + mItemHeight - mPadding, mSelectedPaint);
         return true;
@@ -76,7 +76,7 @@ public class MeiZuMonthView extends MonthView {
      * @param y        日历Card y起点坐标
      */
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y) {
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x, float y) {
         mSchemeBasicPaint.setColor(calendar.getSchemeColor());
 
         canvas.drawCircle(x + mItemWidth - mPadding - mRadio / 2, y + mPadding + mRadio, mRadio, mSchemeBasicPaint);
@@ -102,9 +102,9 @@ public class MeiZuMonthView extends MonthView {
      */
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected) {
-        int cx = x + mItemWidth / 2;
-        int top = y - mItemHeight / 6;
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme, boolean isSelected) {
+        float cx = x + mItemWidth / 2;
+        float top = y - mItemHeight / 6;
 
         boolean isInRange = isInRange(calendar);
 

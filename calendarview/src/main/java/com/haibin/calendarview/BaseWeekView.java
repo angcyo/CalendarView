@@ -164,12 +164,12 @@ public abstract class BaseWeekView extends BaseView {
             return null;
         }
 
-        int indexX = (int) (mX - mDelegate.getCalendarPaddingLeft()) / mItemWidth;
+        int indexX = (int) ((mX - mDelegate.getCalendarPaddingLeft()) / mItemWidth);
         if (indexX >= 7) {
             indexX = 6;
         }
-        int indexY = (int) mY / mItemHeight;
-        int position = indexY * 7 + indexX;// 选择项
+        int indexY = (int) (mY / mItemHeight);
+        int position = indexY * 7 + indexX;
         if (position >= 0 && position < mItems.size())
             return mItems.get(position);
         return null;
@@ -181,11 +181,11 @@ public abstract class BaseWeekView extends BaseView {
             return;
         }
         Calendar calendar = null;
-        int indexX = (int) (mX - mDelegate.getCalendarPaddingLeft()) / mItemWidth;
+        int indexX = (int) ((mX - mDelegate.getCalendarPaddingLeft()) / mItemWidth);
         if (indexX >= 7) {
             indexX = 6;
         }
-        int indexY = (int) mY / mItemHeight;
+        int indexY = (int) (mY / mItemHeight);
         int position = indexY * 7 + indexX;// 选择项
         if (position >= 0 && position < mItems.size()) {
             calendar = mItems.get(position);
@@ -260,7 +260,7 @@ public abstract class BaseWeekView extends BaseView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        heightMeasureSpec = MeasureSpec.makeMeasureSpec(mItemHeight, MeasureSpec.EXACTLY);
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec((int) mItemHeight, MeasureSpec.EXACTLY);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
@@ -283,7 +283,7 @@ public abstract class BaseWeekView extends BaseView {
      * @param x 日历Card x起点坐标
      */
     @SuppressWarnings("unused")
-    protected void onLoopStart(int x) {
+    protected void onLoopStart(float x) {
         // TODO: 2017/11/16
     }
 

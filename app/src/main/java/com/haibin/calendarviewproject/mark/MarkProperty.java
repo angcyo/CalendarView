@@ -128,7 +128,7 @@ public class MarkProperty implements IDrawBaseView {
     }
 
     @Override
-    public boolean onDrawSelected(BaseView baseView, Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme) {
+    public boolean onDrawSelected(BaseView baseView, Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme) {
         float cx = x + baseView.mItemWidth / 2f;
         float cy = y + baseView.mItemHeight / 2f + getOffset();
         canvas.drawCircle(cx, cy, schemeRadius, baseView.mSelectedPaint);
@@ -136,7 +136,7 @@ public class MarkProperty implements IDrawBaseView {
     }
 
     @Override
-    public void onDrawScheme(BaseView baseView, Canvas canvas, Calendar calendar, int x, int y) {
+    public void onDrawScheme(BaseView baseView, Canvas canvas, Calendar calendar, float x, float y) {
         float cx = x + baseView.mItemWidth / 2f;
         float cy = y + baseView.mItemHeight / 2f + getOffset();
 
@@ -165,7 +165,7 @@ public class MarkProperty implements IDrawBaseView {
     }
 
     @Override
-    public void onDrawText(BaseView baseView, Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected) {
+    public void onDrawText(BaseView baseView, Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme, boolean isSelected) {
         float baselineY = baseView.mTextBaseLine + y + getOffset();
         float cx = x + baseView.mItemWidth / 2f;
 

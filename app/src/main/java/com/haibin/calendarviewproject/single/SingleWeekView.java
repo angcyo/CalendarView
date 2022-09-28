@@ -16,9 +16,9 @@ import com.haibin.calendarview.WeekView;
 
 public class SingleWeekView extends WeekView {
 
-    private int mRadius;
+    private float mRadius;
     private Paint mRingPaint = new Paint();
-    private int mRingRadius;
+    private float mRingRadius;
 
     /**
      * 不可用画笔
@@ -62,9 +62,9 @@ public class SingleWeekView extends WeekView {
      * @return false 则不绘制onDrawScheme，因为这里背景色是互斥的
      */
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, boolean hasScheme) {
-        int cx = x + mItemWidth / 2;
-        int cy = mItemHeight / 2;
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, boolean hasScheme) {
+        float cx = x + mItemWidth / 2;
+        float cy = mItemHeight / 2;
         canvas.drawCircle(cx, cy, mRadius, mSelectedPaint);
         canvas.drawCircle(cx, cy, mRingRadius, mRingPaint);
         return true;
@@ -72,16 +72,16 @@ public class SingleWeekView extends WeekView {
 
 
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x) {
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x) {
 //        int cx = x + mItemWidth / 2;
 //        int cy = mItemHeight / 2;
         //canvas.drawCircle(cx, cy, mRadius, mSchemePaint);
     }
 
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, boolean hasScheme, boolean isSelected) {
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, boolean hasScheme, boolean isSelected) {
         float baselineY = mTextBaseLine - dipToPx(getContext(), 1);
-        int cx = x + mItemWidth / 2;
+        float cx = x + mItemWidth / 2;
         if (isSelected) {
             canvas.drawText(calendar.isCurrentDay() ? "今" : "选",
                     cx,

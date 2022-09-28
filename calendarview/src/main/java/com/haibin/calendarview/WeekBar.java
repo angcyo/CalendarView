@@ -47,7 +47,7 @@ public class WeekBar extends LinearLayout {
             setTextSize(mDelegate.getWeekTextSize());
             setTextColor(delegate.getWeekTextColor());
             setBackgroundColor(delegate.getWeekBackground());
-            setPadding(delegate.getCalendarPaddingLeft(), 0, delegate.getCalendarPaddingRight(), 0);
+            setPadding((int) delegate.getCalendarPaddingLeft(), 0, (int) delegate.getCalendarPaddingRight(), 0);
         }
     }
 
@@ -141,7 +141,7 @@ public class WeekBar extends LinearLayout {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (mDelegate != null) {
-            heightMeasureSpec = MeasureSpec.makeMeasureSpec(mDelegate.getWeekBarHeight(), MeasureSpec.EXACTLY);
+            heightMeasureSpec = MeasureSpec.makeMeasureSpec((int) mDelegate.getWeekBarHeight(), MeasureSpec.EXACTLY);
         } else {
             heightMeasureSpec = MeasureSpec.makeMeasureSpec(CalendarUtil.dipToPx(getContext(), 40), MeasureSpec.EXACTLY);
         }

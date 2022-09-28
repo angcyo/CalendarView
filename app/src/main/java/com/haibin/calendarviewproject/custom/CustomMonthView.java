@@ -16,7 +16,7 @@ import com.haibin.calendarview.MonthView;
 
 public class CustomMonthView extends MonthView {
 
-    private int mRadius;
+    private float mRadius;
 
     /**
      * 自定义魅族标记的文本画笔
@@ -102,9 +102,9 @@ public class CustomMonthView extends MonthView {
 
 
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme) {
-        int cx = x + mItemWidth / 2;
-        int cy = y + mItemHeight / 2;
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme) {
+        float cx = x + mItemWidth / 2;
+        float cy = y + mItemHeight / 2;
         if (isTouchDown && mCurrentItem == mItems.indexOf(getIndex())) {
             //点击当前选中的item, 缩放效果提示
             canvas.drawCircle(cx, cy, mRadius - dipToPx(getContext(), 4), mSelectedPaint);
@@ -115,7 +115,7 @@ public class CustomMonthView extends MonthView {
     }
 
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y) {
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x, float y) {
 
         boolean isSelected = isSelected(calendar);
         if (isSelected) {
@@ -129,10 +129,10 @@ public class CustomMonthView extends MonthView {
 
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected) {
-        int cx = x + mItemWidth / 2;
-        int cy = y + mItemHeight / 2;
-        int top = y - mItemHeight / 6;
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme, boolean isSelected) {
+        float cx = x + mItemWidth / 2;
+        float cy = y + mItemHeight / 2;
+        float top = y - mItemHeight / 6;
 
         if (calendar.isCurrentDay() && !isSelected) {
             canvas.drawCircle(cx, cy, mRadius, mCurrentDayPaint);

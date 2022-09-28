@@ -33,9 +33,7 @@ public abstract class MonthView extends BaseMonthView {
     protected void onDraw(Canvas canvas) {
         if (mLineCount == 0)
             return;
-        mItemWidth = (getWidth() -
-                mDelegate.getCalendarPaddingLeft() -
-                mDelegate.getCalendarPaddingRight()) / 7;
+        mItemWidth = (getWidth() - mDelegate.getCalendarPaddingLeft() - mDelegate.getCalendarPaddingRight()) / 7;
         onPreviewHook();
         onDrawCalendar(canvas);
         if (monthAnimHelper != null) {
@@ -100,8 +98,8 @@ public abstract class MonthView extends BaseMonthView {
      * @param d        d
      */
     protected void draw(Canvas canvas, Calendar calendar, int i, int j, int d) {
-        int x = j * mItemWidth + mDelegate.getCalendarPaddingLeft();
-        int y = i * mItemHeight;
+        float x = j * mItemWidth + mDelegate.getCalendarPaddingLeft();
+        float y = i * mItemHeight;
         boolean isSelected = d == mCurrentItem;
         if (monthAnimHelper != null && monthAnimHelper.isStarted()) {
             if (monthAnimHelper.calendar == mItems.get(mCurrentItem)) {
@@ -115,7 +113,7 @@ public abstract class MonthView extends BaseMonthView {
     /**
      * 在指定的x,y绘制日历
      */
-    protected void drawCalendar(Canvas canvas, Calendar calendar, int x, int y, boolean isSelected) {
+    protected void drawCalendar(Canvas canvas, Calendar calendar, float x, float y, boolean isSelected) {
         onLoopStart(x, y);
 
         boolean hasScheme = calendar.hasScheme();
@@ -298,7 +296,7 @@ public abstract class MonthView extends BaseMonthView {
      * @param hasScheme hasScheme 非标记的日期
      * @return 是否绘制onDrawScheme，true or false
      */
-    protected abstract boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme);
+    protected abstract boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme);
 
     /**
      * 绘制标记的日期,这里可以是背景色，标记色什么的
@@ -308,7 +306,7 @@ public abstract class MonthView extends BaseMonthView {
      * @param x        日历Card x起点坐标
      * @param y        日历Card y起点坐标
      */
-    protected abstract void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y);
+    protected abstract void onDrawScheme(Canvas canvas, Calendar calendar, float x, float y);
 
 
     /**
@@ -321,5 +319,5 @@ public abstract class MonthView extends BaseMonthView {
      * @param hasScheme  是否是标记的日期
      * @param isSelected 是否选中
      */
-    protected abstract void onDrawText(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected);
+    protected abstract void onDrawText(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme, boolean isSelected);
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="HardcodedText">
+
+    <RelativeLayout
+        android:id="@+id/rlContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <com.haibin.calendarview.WeekViewPager
+            android:id="@+id/vp_week"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="41dp"
+            android:visibility="gone"
+            tools:background="#0f000000"
+            tools:layout_marginTop="0dp"
+            tools:visibility="gone" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="16dp"
+            android:background="#cfcfcf" />
+
+        <com.donkingliang.groupedadapter.widget.StickyHeaderLayout
+            android:id="@+id/sticky_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/line">
+
+            <com.haibin.calendarview.StickyVerticalMonthRecyclerView
+                android:id="@+id/rv_month"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </com.donkingliang.groupedadapter.widget.StickyHeaderLayout>
+
+
+    </RelativeLayout>
+
+    <com.haibin.calendarview.YearViewPager
+        android:id="@+id/selectLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:visibility="gone"
+        tools:visibility="gone" />
+</merge>

@@ -13,7 +13,7 @@ import com.haibin.calendarview.MultiWeekView;
  */
 
 public class CustomMultiWeekView extends MultiWeekView {
-    private int mRadius;
+    private float mRadius;
 
     public CustomMultiWeekView(Context context) {
         super(context);
@@ -27,10 +27,10 @@ public class CustomMultiWeekView extends MultiWeekView {
 
 
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, boolean hasScheme,
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, boolean hasScheme,
                                      boolean isSelectedPre, boolean isSelectedNext) {
-        int cx = x + mItemWidth / 2;
-        int cy = mItemHeight / 2;
+        float cx = x + mItemWidth / 2;
+        float cy = mItemHeight / 2;
 
         if (isSelectedPre) {
             if (isSelectedNext) {
@@ -50,16 +50,16 @@ public class CustomMultiWeekView extends MultiWeekView {
     }
 
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, boolean isSelected) {
-        int cx = x + mItemWidth / 2;
-        int cy = mItemHeight / 2;
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x, boolean isSelected) {
+        float cx = x + mItemWidth / 2;
+        float cy = mItemHeight / 2;
         canvas.drawCircle(cx, cy, mRadius, mSchemePaint);
     }
 
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, boolean hasScheme, boolean isSelected) {
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, boolean hasScheme, boolean isSelected) {
         float baselineY = mTextBaseLine;
-        int cx = x + mItemWidth / 2;
+        float cx = x + mItemWidth / 2;
         boolean isInRange = isInRange(calendar);
         boolean isEnable = !onCalendarIntercept(calendar);
         if (isSelected) {

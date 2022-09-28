@@ -45,7 +45,7 @@ public abstract class BaseMonthView extends BaseView {
     /**
      * 日历高度
      */
-    protected int mHeight;
+    protected float mHeight;
 
 
     /**
@@ -68,8 +68,7 @@ public abstract class BaseMonthView extends BaseView {
         mYear = year;
         mMonth = month;
         initCalendar();
-        int newHeight = CalendarUtil.getMonthViewHeight(year, month, mItemHeight,
-                mDelegate.getWeekStart(), mDelegate);
+        float newHeight = CalendarUtil.getMonthViewHeight(year, month, mItemHeight, mDelegate.getWeekStart(), mDelegate);
         if (mHeight != newHeight) {
             requestLayout();
         }
@@ -133,12 +132,12 @@ public abstract class BaseMonthView extends BaseView {
             onClickCalendarPadding();
             return null;
         }
-        int indexX = (int) (mX - mDelegate.getCalendarPaddingLeft()) / mItemWidth;
+        int indexX = (int) ((mX - mDelegate.getCalendarPaddingLeft()) / mItemWidth);
         if (indexX >= 7) {
             indexX = 6;
         }
-        int indexY = (int) mY / mItemHeight;
-        int position = indexY * 7 + indexX;// 选择项
+        int indexY = (int) (mY / mItemHeight);
+        int position = indexY * 7 + indexX;
         if (position >= 0 && position < mItems.size()) {
             return mItems.get(position);
         }
@@ -150,11 +149,11 @@ public abstract class BaseMonthView extends BaseView {
             return;
         }
         Calendar calendar = null;
-        int indexX = (int) (mX - mDelegate.getCalendarPaddingLeft()) / mItemWidth;
+        int indexX = (int) ((mX - mDelegate.getCalendarPaddingLeft()) / mItemWidth);
         if (indexX >= 7) {
             indexX = 6;
         }
-        int indexY = (int) mY / mItemHeight;
+        int indexY = (int) (mY / mItemHeight);
         int position = indexY * 7 + indexX;// 选择项
         if (position >= 0 && position < mItems.size()) {
             calendar = mItems.get(position);
@@ -214,7 +213,7 @@ public abstract class BaseMonthView extends BaseView {
     @Override
     void updateItemHeight() {
         super.updateItemHeight();
-        int newHeight = CalendarUtil.getMonthViewHeight(mYear, mMonth, mItemHeight,
+        float newHeight = CalendarUtil.getMonthViewHeight(mYear, mMonth, mItemHeight,
                 mDelegate.getWeekStart(), mDelegate);
         if (mHeight != newHeight) {
             requestLayout();
@@ -249,7 +248,7 @@ public abstract class BaseMonthView extends BaseView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (mLineCount != 0) {
-            heightMeasureSpec = MeasureSpec.makeMeasureSpec(mHeight, MeasureSpec.EXACTLY);
+            heightMeasureSpec = MeasureSpec.makeMeasureSpec((int) mHeight, MeasureSpec.EXACTLY);
         }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
@@ -273,7 +272,7 @@ public abstract class BaseMonthView extends BaseView {
      * @param x 日历Card x起点坐标
      * @param y 日历Card y起点坐标
      */
-    protected void onLoopStart(int x, int y) {
+    protected void onLoopStart(float x, float y) {
         // TODO: 2017/11/16  
     }
 

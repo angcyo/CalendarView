@@ -42,7 +42,9 @@ public final class MonthViewPager extends ViewPager {
 
     private CalendarViewDelegate mDelegate;
 
-    private int mNextViewHeight, mPreViewHeight, mCurrentViewHeight;
+    private float mNextViewHeight;
+    private float mPreViewHeight;
+    private float mCurrentViewHeight;
 
     CalendarLayout mParentLayout;
 
@@ -85,7 +87,7 @@ public final class MonthViewPager extends ViewPager {
 
         ViewGroup.LayoutParams params = getLayoutParams();
         if (params != null) {
-            params.height = mCurrentViewHeight;
+            params.height = (int) mCurrentViewHeight;
             setLayoutParams(params);
         }
         init();
@@ -212,7 +214,7 @@ public final class MonthViewPager extends ViewPager {
             mCurrentViewHeight = 6 * mDelegate.getCalendarItemHeight();
             ViewGroup.LayoutParams params = getLayoutParams();
             if (params != null) {
-                params.height = mCurrentViewHeight;
+                params.height = (int) mCurrentViewHeight;
             }
             return;
         }
@@ -220,7 +222,7 @@ public final class MonthViewPager extends ViewPager {
         if (mParentLayout != null) {
             if (getVisibility() != VISIBLE) {//如果已经显示周视图，则需要动态改变月视图高度，否则显示就有bug
                 ViewGroup.LayoutParams params = getLayoutParams();
-                params.height = CalendarUtil.getMonthViewHeight(year, month,
+                params.height = (int) CalendarUtil.getMonthViewHeight(year, month,
                         mDelegate.getCalendarItemHeight(), mDelegate.getWeekStart(),
                         mDelegate);
                 setLayoutParams(params);
@@ -517,7 +519,7 @@ public final class MonthViewPager extends ViewPager {
             updateMonthViewHeight(mDelegate.mSelectedCalendar.getYear(), mDelegate.mSelectedCalendar.getMonth());
         }
         ViewGroup.LayoutParams params = getLayoutParams();
-        params.height = mCurrentViewHeight;
+        params.height = (int) mCurrentViewHeight;
         setLayoutParams(params);
         if (mParentLayout != null) {
             mParentLayout.updateContentViewTranslateY();
@@ -539,7 +541,7 @@ public final class MonthViewPager extends ViewPager {
 
         updateMonthViewHeight(mDelegate.mSelectedCalendar.getYear(), mDelegate.mSelectedCalendar.getMonth());
         ViewGroup.LayoutParams params = getLayoutParams();
-        params.height = mCurrentViewHeight;
+        params.height = (int) mCurrentViewHeight;
         setLayoutParams(params);
         if (mParentLayout != null) {
             int i = CalendarUtil.getWeekFromDayInMonth(mDelegate.mSelectedCalendar, mDelegate.getWeekStart());
@@ -588,7 +590,7 @@ public final class MonthViewPager extends ViewPager {
             }
         }
         ViewGroup.LayoutParams params = getLayoutParams();
-        params.height = mCurrentViewHeight;
+        params.height = (int) mCurrentViewHeight;
         setLayoutParams(params);
     }
 

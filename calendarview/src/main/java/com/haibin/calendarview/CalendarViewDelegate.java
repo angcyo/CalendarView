@@ -154,34 +154,32 @@ public class CalendarViewDelegate {
     /**
      * 年视图一些padding
      */
-    private int
-            mYearViewPadding,
-            mYearViewPaddingLeft,
-            mYearViewPaddingRight;
+    private float mYearViewPadding;
+    private float mYearViewPaddingLeft;
+    private float mYearViewPaddingRight;
 
     /**
      * 年视图一些padding
      */
-    private int
-            mYearViewMonthPaddingLeft,
-            mYearViewMonthPaddingRight,
-            mYearViewMonthPaddingTop,
-            mYearViewMonthPaddingBottom;
+    private float mYearViewMonthPaddingLeft;
+    private float mYearViewMonthPaddingRight;
+    private float mYearViewMonthPaddingTop;
+    private float mYearViewMonthPaddingBottom;
 
     /**
      * 日历内部左右padding
      */
-    private int mCalendarPadding;
+    private float mCalendarPadding;
 
     /**
      * 日历内部左padding
      */
-    private int mCalendarPaddingLeft;
+    private float mCalendarPaddingLeft;
 
     /**
      * 日历内部右padding
      */
-    private int mCalendarPaddingRight;
+    private float mCalendarPaddingRight;
 
     /**
      * 年视图字体大小
@@ -193,8 +191,8 @@ public class CalendarViewDelegate {
     /**
      * 年视图月份高度和周的高度
      */
-    private int mYearViewMonthHeight,
-            mYearViewWeekHeight;
+    private float mYearViewMonthHeight;
+    private float mYearViewWeekHeight;
 
 
     /**
@@ -217,7 +215,7 @@ public class CalendarViewDelegate {
     /**
      * 星期栏Line margin
      */
-    private int mWeekLineMargin;
+    private float mWeekLineMargin;
 
     /**
      * 星期栏字体大小
@@ -305,7 +303,7 @@ public class CalendarViewDelegate {
     /**
      * 日历卡的项高度
      */
-    private int mCalendarItemHeight;
+    private float mCalendarItemHeight;
 
     /**
      * 是否是全屏日历
@@ -315,7 +313,7 @@ public class CalendarViewDelegate {
     /**
      * 星期栏的高度
      */
-    private int mWeekBarHeight;
+    private float mWeekBarHeight;
 
     /**
      * 今天的日子
@@ -406,6 +404,8 @@ public class CalendarViewDelegate {
 
     CalendarView.OnVerticalItemInitializeListener mVerticalItemInitializeListener;
 
+    CalendarView.OnStickyVerticalItemInitializeListener mStickyVerticalItemInitializeListener;
+
     /**
      * 保存选中的日期
      */
@@ -456,9 +456,9 @@ public class CalendarViewDelegate {
 
         LunarCalendar.init(context);
 
-        mCalendarPadding = (int) array.getDimension(R.styleable.CalendarView_calendar_padding, 0);
-        mCalendarPaddingLeft = (int) array.getDimension(R.styleable.CalendarView_calendar_padding_left, 0);
-        mCalendarPaddingRight = (int) array.getDimension(R.styleable.CalendarView_calendar_padding_right, 0);
+        mCalendarPadding = array.getDimension(R.styleable.CalendarView_calendar_padding, 0);
+        mCalendarPaddingLeft = array.getDimension(R.styleable.CalendarView_calendar_padding_left, 0);
+        mCalendarPaddingRight = array.getDimension(R.styleable.CalendarView_calendar_padding_right, 0);
 
         if (mCalendarPadding != 0) {
             mCalendarPaddingLeft = mCalendarPadding;
@@ -474,14 +474,14 @@ public class CalendarViewDelegate {
         mWeekBarClassPath = array.getString(R.styleable.CalendarView_week_bar_view);
         mWeekTextSize = array.getDimensionPixelSize(R.styleable.CalendarView_week_text_size,
                 CalendarUtil.dipToPx(context, 12));
-        mWeekBarHeight = (int) array.getDimension(R.styleable.CalendarView_week_bar_height,
+        mWeekBarHeight = array.getDimension(R.styleable.CalendarView_week_bar_height,
                 CalendarUtil.dipToPx(context, 40));
-        mWeekLineMargin = (int) array.getDimension(R.styleable.CalendarView_week_line_margin,
+        mWeekLineMargin = array.getDimension(R.styleable.CalendarView_week_line_margin,
                 CalendarUtil.dipToPx(context, 0));
 
         mSchemeText = array.getString(R.styleable.CalendarView_scheme_text);
         if (TextUtils.isEmpty(mSchemeText)) {
-            mSchemeText = "记";
+            mSchemeText = "";
         }
 
         mMonthViewScrollable = array.getBoolean(R.styleable.CalendarView_month_view_scrollable, true);
@@ -528,7 +528,7 @@ public class CalendarViewDelegate {
                 CalendarUtil.dipToPx(context, 16));
         mLunarTextSize = array.getDimensionPixelSize(R.styleable.CalendarView_lunar_text_size,
                 CalendarUtil.dipToPx(context, 10));
-        mCalendarItemHeight = (int) array.getDimension(R.styleable.CalendarView_calendar_height,
+        mCalendarItemHeight = array.getDimension(R.styleable.CalendarView_calendar_height,
                 CalendarUtil.dipToPx(context, 56));
         isFullScreenCalendar = array.getBoolean(R.styleable.CalendarView_calendar_match_parent, false);
 
@@ -550,11 +550,11 @@ public class CalendarViewDelegate {
         mYearViewWeekHeight = array.getDimensionPixelSize(R.styleable.CalendarView_year_view_week_height,
                 CalendarUtil.dipToPx(context, 0));
 
-        mYearViewPadding = (int) array.getDimension(R.styleable.CalendarView_year_view_padding,
+        mYearViewPadding = array.getDimension(R.styleable.CalendarView_year_view_padding,
                 CalendarUtil.dipToPx(context, 12));
-        mYearViewPaddingLeft = (int) array.getDimension(R.styleable.CalendarView_year_view_padding_left,
+        mYearViewPaddingLeft = array.getDimension(R.styleable.CalendarView_year_view_padding_left,
                 CalendarUtil.dipToPx(context, 12));
-        mYearViewPaddingRight = (int) array.getDimension(R.styleable.CalendarView_year_view_padding_right,
+        mYearViewPaddingRight = array.getDimension(R.styleable.CalendarView_year_view_padding_right,
                 CalendarUtil.dipToPx(context, 12));
         showYearView = array.getBoolean(R.styleable.CalendarView_year_view_show, showYearView);
 
@@ -567,14 +567,14 @@ public class CalendarViewDelegate {
             mYearViewPaddingRight = mYearViewPadding;
         }
 
-        mYearViewMonthPaddingTop = (int) array.getDimension(R.styleable.CalendarView_year_view_month_padding_top,
+        mYearViewMonthPaddingTop = array.getDimension(R.styleable.CalendarView_year_view_month_padding_top,
                 CalendarUtil.dipToPx(context, 4));
-        mYearViewMonthPaddingBottom = (int) array.getDimension(R.styleable.CalendarView_year_view_month_padding_bottom,
+        mYearViewMonthPaddingBottom = array.getDimension(R.styleable.CalendarView_year_view_month_padding_bottom,
                 CalendarUtil.dipToPx(context, 4));
 
-        mYearViewMonthPaddingLeft = (int) array.getDimension(R.styleable.CalendarView_year_view_month_padding_left,
+        mYearViewMonthPaddingLeft = array.getDimension(R.styleable.CalendarView_year_view_month_padding_left,
                 CalendarUtil.dipToPx(context, 4));
-        mYearViewMonthPaddingRight = (int) array.getDimension(R.styleable.CalendarView_year_view_month_padding_right,
+        mYearViewMonthPaddingRight = array.getDimension(R.styleable.CalendarView_year_view_month_padding_right,
                 CalendarUtil.dipToPx(context, 4));
 
         if (mMinYear <= MIN_YEAR) mMinYear = MIN_YEAR;
@@ -732,7 +732,7 @@ public class CalendarViewDelegate {
         return mWeekLineBackground;
     }
 
-    int getWeekLineMargin() {
+    float getWeekLineMargin() {
         return mWeekLineMargin;
     }
 
@@ -756,7 +756,7 @@ public class CalendarViewDelegate {
         return mYearViewClassPath;
     }
 
-    int getWeekBarHeight() {
+    float getWeekBarHeight() {
         return mWeekBarHeight;
     }
 
@@ -776,11 +776,11 @@ public class CalendarViewDelegate {
         return mLunarTextSize;
     }
 
-    int getCalendarItemHeight() {
+    float getCalendarItemHeight() {
         return mCalendarItemHeight;
     }
 
-    void setCalendarItemHeight(int height) {
+    void setCalendarItemHeight(float height) {
         mCalendarItemHeight = height;
     }
 
@@ -818,40 +818,40 @@ public class CalendarViewDelegate {
     }
 
     @SuppressWarnings("unused")
-    int getYearViewPadding() {
+    float getYearViewPadding() {
         return mYearViewPadding;
     }
 
-    int getYearViewPaddingLeft() {
+    float getYearViewPaddingLeft() {
         return mYearViewPaddingLeft;
     }
 
-    int getYearViewPaddingRight() {
+    float getYearViewPaddingRight() {
         return mYearViewPaddingRight;
     }
 
 
-    int getYearViewMonthPaddingLeft() {
+    float getYearViewMonthPaddingLeft() {
         return mYearViewMonthPaddingLeft;
     }
 
-    int getYearViewMonthPaddingRight() {
+    float getYearViewMonthPaddingRight() {
         return mYearViewMonthPaddingRight;
     }
 
-    int getYearViewMonthPaddingTop() {
+    float getYearViewMonthPaddingTop() {
         return mYearViewMonthPaddingTop;
     }
 
-    int getYearViewMonthPaddingBottom() {
+    float getYearViewMonthPaddingBottom() {
         return mYearViewMonthPaddingBottom;
     }
 
-    int getYearViewWeekHeight() {
+    float getYearViewWeekHeight() {
         return mYearViewWeekHeight;
     }
 
-    int getYearViewMonthHeight() {
+    float getYearViewMonthHeight() {
         return mYearViewMonthHeight;
     }
 
@@ -1015,7 +1015,7 @@ public class CalendarViewDelegate {
     }
 
     @SuppressWarnings("unused")
-    int getCalendarPadding() {
+    float getCalendarPadding() {
         return mCalendarPadding;
     }
 
@@ -1025,7 +1025,7 @@ public class CalendarViewDelegate {
         mCalendarPaddingRight = mCalendarPadding;
     }
 
-    int getCalendarPaddingLeft() {
+    float getCalendarPaddingLeft() {
         return mCalendarPaddingLeft;
     }
 
@@ -1033,7 +1033,7 @@ public class CalendarViewDelegate {
         this.mCalendarPaddingLeft = mCalendarPaddingLeft;
     }
 
-    int getCalendarPaddingRight() {
+    float getCalendarPaddingRight() {
         return mCalendarPaddingRight;
     }
 

@@ -1,9 +1,7 @@
 package com.haibin.calendarviewproject.colorful;
 
 import android.content.Context;
-import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
-import android.view.View;
 
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.WeekView;
@@ -15,7 +13,7 @@ import com.haibin.calendarview.WeekView;
 
 public class ColorfulWeekView extends WeekView {
 
-    private int mRadius;
+    private float mRadius;
 
     public ColorfulWeekView(Context context) {
         super(context);
@@ -30,7 +28,7 @@ public class ColorfulWeekView extends WeekView {
 
     @Override
     protected void onPreviewHook() {
-        mRadius = Math.min(mItemWidth, mItemHeight) / 5 * 2;
+        mRadius = (Math.min(mItemWidth, mItemHeight) / 5 * 2);
     }
 
     /**
@@ -43,26 +41,26 @@ public class ColorfulWeekView extends WeekView {
      * @return false 则不绘制onDrawScheme，因为这里背景色是互斥的
      */
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, boolean hasScheme) {
-        int cx = x + mItemWidth / 2;
-        int cy = mItemHeight / 2;
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, boolean hasScheme) {
+        float cx = x + mItemWidth / 2;
+        float cy = mItemHeight / 2;
         canvas.drawCircle(cx, cy, mRadius, mSelectedPaint);
         return true;
     }
 
 
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x) {
-        int cx = x + mItemWidth / 2;
-        int cy = mItemHeight / 2;
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x) {
+        float cx = x + mItemWidth / 2;
+        float cy = mItemHeight / 2;
         canvas.drawCircle(cx, cy, mRadius, mSchemePaint);
     }
 
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, boolean hasScheme, boolean isSelected) {
-        int cx = x + mItemWidth / 2;
-        int top = -mItemHeight / 8;
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, boolean hasScheme, boolean isSelected) {
+        float cx = x + mItemWidth / 2;
+        float top = -mItemHeight / 8;
         if (isSelected) {
             canvas.drawText(String.valueOf(calendar.getDay()), cx, mTextBaseLine + top,
                     calendar.isCurrentDay() ? mCurDayTextPaint : mSelectTextPaint);

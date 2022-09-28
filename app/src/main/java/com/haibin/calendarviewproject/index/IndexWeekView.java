@@ -44,7 +44,7 @@ public class IndexWeekView extends WeekView {
      * @param hasScheme hasScheme 非标记的日期
      */
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, boolean hasScheme) {
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, boolean hasScheme) {
         mSelectedPaint.setStyle(Paint.Style.FILL);
         canvas.drawRect(x + mPadding, mPadding, x + mItemWidth - mPadding, mItemHeight - mPadding, mSelectedPaint);
         return true;
@@ -59,7 +59,7 @@ public class IndexWeekView extends WeekView {
      */
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x) {
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x) {
         mSchemeBasicPaint.setColor(calendar.getSchemeColor());
         canvas.drawRect(x + mItemWidth / 2 - mW / 2,
                 mItemHeight - mH * 2 - mPadding,
@@ -69,9 +69,9 @@ public class IndexWeekView extends WeekView {
 
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, boolean hasScheme, boolean isSelected) {
-        int cx = x + mItemWidth / 2;
-        int top = -mItemHeight / 6;
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, boolean hasScheme, boolean isSelected) {
+        float cx = x + mItemWidth / 2;
+        float top = -mItemHeight / 6;
         if (hasScheme) {
             canvas.drawText(String.valueOf(calendar.getDay()), cx, mTextBaseLine + top,
                     calendar.isCurrentDay() ? mCurDayTextPaint :

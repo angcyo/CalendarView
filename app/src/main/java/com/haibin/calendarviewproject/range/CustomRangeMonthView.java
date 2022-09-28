@@ -14,7 +14,7 @@ import com.haibin.calendarview.RangeMonthView;
 
 public class CustomRangeMonthView extends RangeMonthView {
 
-    private int mRadius;
+    private float mRadius;
 
     public CustomRangeMonthView(Context context) {
         super(context);
@@ -28,10 +28,10 @@ public class CustomRangeMonthView extends RangeMonthView {
     }
 
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme,
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme,
                                      boolean isSelectedPre, boolean isSelectedNext) {
-        int cx = x + mItemWidth / 2;
-        int cy = y + mItemHeight / 2;
+        float cx = x + mItemWidth / 2;
+        float cy = y + mItemHeight / 2;
         if (isSelectedPre) {
             if (isSelectedNext) {
                 canvas.drawRect(x, cy - mRadius, x + mItemWidth, cy + mRadius, mSelectedPaint);
@@ -51,16 +51,16 @@ public class CustomRangeMonthView extends RangeMonthView {
     }
 
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y, boolean isSelected) {
-        int cx = x + mItemWidth / 2;
-        int cy = y + mItemHeight / 2;
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x, float y, boolean isSelected) {
+        float cx = x + mItemWidth / 2;
+        float cy = y + mItemHeight / 2;
         canvas.drawCircle(cx, cy, mRadius, mSchemePaint);
     }
 
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected) {
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme, boolean isSelected) {
         float baselineY = mTextBaseLine + y;
-        int cx = x + mItemWidth / 2;
+        float cx = x + mItemWidth / 2;
 
         boolean isInRange = isInRange(calendar);
         boolean isEnable = !onCalendarIntercept(calendar);

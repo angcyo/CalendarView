@@ -12,17 +12,17 @@ import android.graphics.Canvas;
 public interface IDrawBaseView {
 
     /**
-     * @see MonthView#onDrawSelected(android.graphics.Canvas, com.haibin.calendarview.Calendar, int, int, boolean)
+     * @see MonthView#onDrawSelected(Canvas, Calendar, float, float, boolean)
      */
-    boolean onDrawSelected(BaseView baseView, Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme);
+    boolean onDrawSelected(BaseView baseView, Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme);
 
     /**
-     * @see MonthView#onDrawScheme(android.graphics.Canvas, com.haibin.calendarview.Calendar, int, int)
+     * @see MonthView#onDrawScheme(Canvas, Calendar, float, float)
      */
-    void onDrawScheme(BaseView baseView, Canvas canvas, Calendar calendar, int x, int y);
+    void onDrawScheme(BaseView baseView, Canvas canvas, Calendar calendar, float x, float y);
 
     /**
-     * @see MonthView#onDrawText(android.graphics.Canvas, com.haibin.calendarview.Calendar, int, int, boolean, boolean)
+     * @see MonthView#onDrawText(Canvas, Calendar, float, float, boolean, boolean)
      */
-    void onDrawText(BaseView baseView, Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected);
+    void onDrawText(BaseView baseView, Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme, boolean isSelected);
 }

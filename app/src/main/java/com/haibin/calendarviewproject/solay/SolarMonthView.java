@@ -21,7 +21,7 @@ public class SolarMonthView extends MonthView {
 
     private Paint mPointPaint = new Paint();
 
-    private int mRadius;
+    private float mRadius;
     private int mPointRadius;
 
     public SolarMonthView(Context context) {
@@ -44,17 +44,17 @@ public class SolarMonthView extends MonthView {
     }
 
     @Override
-    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme) {
-        int cx = x + mItemWidth / 2;
-        int cy = y + mItemHeight / 2;
+    protected boolean onDrawSelected(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme) {
+        float cx = x + mItemWidth / 2;
+        float cy = y + mItemHeight / 2;
         canvas.drawCircle(cx, cy, mRadius, mSelectedPaint);
         return false;
     }
 
     @Override
-    protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y) {
-        int cx = x + mItemWidth / 2;
-        int cy = y + mItemHeight / 2;
+    protected void onDrawScheme(Canvas canvas, Calendar calendar, float x, float y) {
+        float cx = x + mItemWidth / 2;
+        float cy = y + mItemHeight / 2;
         canvas.drawCircle(cx, cy, mRadius, mSchemePaint);
 
         List<Calendar.Scheme> schemes = calendar.getSchemes();
@@ -77,9 +77,9 @@ public class SolarMonthView extends MonthView {
     }
 
     @Override
-    protected void onDrawText(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected) {
+    protected void onDrawText(Canvas canvas, Calendar calendar, float x, float y, boolean hasScheme, boolean isSelected) {
         float baselineY = mTextBaseLine + y;
-        int cx = x + mItemWidth / 2;
+        float cx = x + mItemWidth / 2;
 
         if (isSelected) {
             canvas.drawText(String.valueOf(calendar.getDay()),
