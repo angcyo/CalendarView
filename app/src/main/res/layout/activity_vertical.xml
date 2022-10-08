@@ -72,7 +72,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="2dp"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="16dp"
                 android:text="切"
                 android:textColor="#000000"
                 android:textSize="12sp" />
@@ -84,7 +84,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="2dp"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="16dp"
                 android:text="上"
                 android:textColor="#000000"
                 android:textSize="12sp" />
@@ -96,15 +96,15 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="2dp"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="16dp"
                 android:text="下"
                 android:textColor="#000000"
                 android:textSize="12sp" />
 
             <FrameLayout
                 android:id="@+id/fl_current"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginRight="12dp"
                 android:background="@drawable/bg_ripple">
 
@@ -115,7 +115,7 @@
                     android:contentDescription="@string/app_name"
                     android:scaleType="centerInside"
                     android:src="@mipmap/ic_calendar"
-                    android:tint="#000000" />
+                    app:tint="#000000" />
 
                 <TextView
                     android:id="@+id/tv_current_day"
@@ -132,7 +132,7 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <com.haibin.calendarview.VerticalCalendarView
+    <com.haibin.calendarview.StickyVerticalCalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

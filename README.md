@@ -1,6 +1,22 @@
 
 # CalenderView
 
+[![](https://jitpack.io/v/michaellee123/CalendarView.svg)](https://jitpack.io/#michaellee123/CalendarView)
+
+李某人套娃基于[CalenderView](https://github.com/angcyo/CalendarView)`3.7.1.37`的版本修改，实现了滚动年月标题吸顶。如图：
+
+![](/png/gif_sticky_vertical_scroll.gif)
+
+吸顶效果使用：[GroupedRecyclerViewAdapter](https://github.com/donkingliang/GroupedRecyclerViewAdapter)，感谢🙏
+
+使用方法，用`StickyVerticalCalendarView`替换掉原本的`VerticalCalendarView`即可。
+
+---
+
+分割线
+
+---
+
 基于[CalenderView](https://github.com/huanghaibin-dev/CalendarView)`3.7.1`的版本修改, 实现了如下功能:
 
 -  `垂直列表日历`: 基于`RecyclerView`实现

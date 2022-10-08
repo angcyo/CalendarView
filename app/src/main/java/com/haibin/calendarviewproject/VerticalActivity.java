@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.haibin.calendarview.BaseMonthView;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
+import com.haibin.calendarview.StickyVerticalCalendarView;
 import com.haibin.calendarview.VerticalCalendarView;
 import com.haibin.calendarview.VerticalMonthRecyclerView;
 import com.haibin.calendarviewproject.base.activity.BaseActivity;
@@ -32,7 +33,7 @@ public class VerticalActivity extends BaseActivity implements
 
     TextView mTextCurrentDay;
 
-    VerticalCalendarView mCalendarView;
+    StickyVerticalCalendarView mCalendarView;
 
     RelativeLayout mRelativeTool;
     int doCount = 0;

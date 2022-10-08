@@ -28,6 +28,7 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import java.lang.reflect.Constructor;
@@ -1980,5 +1981,13 @@ public class CalendarView extends FrameLayout {
 
     public void setOnVerticalItemInitialize(OnVerticalItemInitializeListener listener) {
         this.mDelegate.mVerticalItemInitializeListener = listener;
+    }
+
+    public interface OnStickyVerticalItemInitializeListener {
+        void onVerticalItemInitialize(RecyclerView.ViewHolder viewHolder, int position, int year, int month);
+    }
+
+    public void setOnStickyVerticalItemInitialize(OnStickyVerticalItemInitializeListener listener) {
+        this.mDelegate.mStickyVerticalItemInitializeListener = listener;
     }
 }

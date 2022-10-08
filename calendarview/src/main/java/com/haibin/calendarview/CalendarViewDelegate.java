@@ -406,6 +406,8 @@ public class CalendarViewDelegate {
 
     CalendarView.OnVerticalItemInitializeListener mVerticalItemInitializeListener;
 
+    CalendarView.OnStickyVerticalItemInitializeListener mStickyVerticalItemInitializeListener;
+
     /**
      * 保存选中的日期
      */
