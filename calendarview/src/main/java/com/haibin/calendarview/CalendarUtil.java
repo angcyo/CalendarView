@@ -30,6 +30,7 @@ import java.util.List;
 public final class CalendarUtil {
 
     private static final long ONE_DAY = 1000 * 3600 * 24;
+    public static final int MONTH_PRIORITY_DAY = 30;
 
     @SuppressLint("SimpleDateFormat")
     static int getDate(String formatStr, Date date) {
@@ -95,47 +96,67 @@ public final class CalendarUtil {
         if (mode == CalendarViewDelegate.MODE_ALL_MONTH) {
             return 6;
         }
-        int nextDiff = CalendarUtil.getMonthEndDiff(year, month, weekStartWith);
+        int nextDiff = CalendarUtil.getMonthEndDiff(null, year, month, weekStartWith);
         int preDiff = CalendarUtil.getMonthViewStartDiff(year, month, weekStartWith);
         int monthDayCount = CalendarUtil.getMonthDaysCount(year, month);
         return (preDiff + monthDayCount + nextDiff) / 7;
     }
 
-    /**
-     * 获取月视图的确切高度
-     * Test pass
-     *
-     * @param year       年
-     * @param month      月
-     * @param itemHeight 每项的高度
-     * @param weekStartWith 周起始
-     * @return 不需要多余行的高度
-     */
-    public static int getMonthViewHeight(int year, int month, int itemHeight, int weekStartWith) {
+    private static int getMonthViewHeight(CalendarViewDelegate delegate, int year, int month, int itemHeight, int weekStartWith) {
         java.util.Calendar date = java.util.Calendar.getInstance();
         date.set(year, month - 1, 1, 12, 0, 0);
         int preDiff = getMonthViewStartDiff(year, month, weekStartWith);
         int monthDaysCount = getMonthDaysCount(year, month);
-        int nextDiff = getMonthEndDiff(year, month, monthDaysCount, weekStartWith);
+        int nextDiff = getMonthEndDiff(delegate, year, month, monthDaysCount, weekStartWith);
         return (preDiff + monthDaysCount + nextDiff) / 7 * itemHeight;
+    }
+
+    private static int getMonthViewHeightWeekMode(CalendarViewDelegate delegate, int year, int month, int itemHeight, int weekStartWith) {
+        int preDiff = getMonthCurrentDayStartDiff(delegate, year, month, weekStartWith);
+        int monthDaysCount = delegate.mCurrentDate.getDay();
+        int nextDiff = getMonthCurrentDayEndDiff(delegate, year, month, weekStartWith);
+        return (int) (Math.ceil((preDiff + monthDaysCount + nextDiff) / 7f) * itemHeight);
+    }
+
+    /**
+     * 计算月视图的确切高度
+     * Test pass
+     *
+     * @param year          年
+     * @param month         月
+     * @param itemHeight    每项的高度
+     * @param weekStartWith 周起始
+     * @return 不需要多余行的高度
+     */
+    public static int calcMonthViewHeight(int year, int month, int itemHeight, CalendarViewDelegate delegate) {
+        int weekStartWith = delegate.getWeekStart();
+        boolean isCurrentMonth = CalendarUtil.isCurrentMonth(delegate, year, month);
+        boolean priorityWeekMode = delegate.monthPriorityShowWeekMode && isCurrentMonth;
+        if (priorityWeekMode) {
+            return getMonthViewHeightWeekMode(delegate, year, month, itemHeight, weekStartWith);
+        }
+        return getMonthViewHeight(delegate, year, month, itemHeight, weekStartWith);
     }
 
     /**
      * 获取月视图的确切高度
      * Test pass
      *
-     * @param year       年
-     * @param month      月
-     * @param itemHeight 每项的高度
+     * @param year          年
+     * @param month         月
+     * @param itemHeight    每项的高度
      * @param weekStartWith weekStartWith
-     * @param mode  mode
+     * @param mode          mode
      * @return 不需要多余行的高度
      */
-    public static int getMonthViewHeight(int year, int month, int itemHeight, int weekStartWith, int mode) {
+    public static int getMonthViewHeight(int year, int month, int itemHeight, int weekStartWith, CalendarViewDelegate delegate) {
+        int mode = delegate.getMonthViewShowMode();
+        boolean isCurrentMonth = CalendarUtil.isCurrentMonth(delegate, year, month);
+        boolean priorityWeekMode = delegate.monthPriorityShowWeekMode && isCurrentMonth;
         if (mode == CalendarViewDelegate.MODE_ALL_MONTH) {
             return itemHeight * 6;
         }
-        return getMonthViewHeight(year, month, itemHeight, weekStartWith);
+        return calcMonthViewHeight(year, month, itemHeight, delegate);
     }
 
     /**
@@ -228,8 +249,13 @@ public final class CalendarUtil {
      * @return 获取日期所在月视图对应的起始偏移量 the start diff with MonthView
      */
     static int getMonthViewStartDiff(int year, int month, int weekStart) {
+        return getMonthViewStartDiff(year, month, 1, weekStart);
+    }
+
+    static int getMonthViewStartDiff(int year, int month, int day, int weekStart) {
         java.util.Calendar date = java.util.Calendar.getInstance();
-        date.set(year, month - 1, 1, 12, 0, 0);
+        date.set(year, month - 1, day, 12, 0, 0);//当前月的第一天是周几, 算出填满这一周还需要几天
+
         int week = date.get(java.util.Calendar.DAY_OF_WEEK);
         if (weekStart == CalendarViewDelegate.WEEK_START_WITH_SUN) {
             return week - 1;
@@ -240,21 +266,42 @@ public final class CalendarUtil {
         return week == CalendarViewDelegate.WEEK_START_WITH_SAT ? 0 : week;
     }
 
-
     /**
-     * DAY_OF_WEEK return  1  2  3 	4  5  6	 7，偏移了一位
-     * 获取日期月份对应的结束偏移量,用于计算两个年份之间总共有多少周，不用于MonthView
-     * Test pass
-     *
-     * @param year      年
-     * @param month     月
-     * @param weekStart 周起始
-     * @return 获取日期月份对应的结束偏移量 the end diff in Month not MonthView
+     * 以当前天为计算依旧, 往上推算30天, 计算需要补齐的天数
      */
-    static int getMonthEndDiff(int year, int month, int weekStart) {
-        return getMonthEndDiff(year, month, getMonthDaysCount(year, month), weekStart);
+    static int getMonthCurrentDayStartDiff(CalendarViewDelegate delegate, int year, int month, int weekStart) {
+        int currentDay = delegate.mCurrentDate.getDay();
+        int interval = MONTH_PRIORITY_DAY;
+        int diffDay = interval - currentDay;
+
+        java.util.Calendar date;
+        if (delegate == null) {
+            date = java.util.Calendar.getInstance();
+        } else {
+            date = delegate.mCurrentDate.toCalendar();
+        }
+
+        date.add(java.util.Calendar.DAY_OF_MONTH, -(interval - 1)); //在当前日期上减29天, 包含今天就是30天了
+        int diff1 = getMonthViewStartDiff(date.get(java.util.Calendar.YEAR),
+                date.get(java.util.Calendar.MONTH) + 1,
+                date.get(java.util.Calendar.DAY_OF_MONTH),
+                weekStart);
+        return diff1 + diffDay;
     }
 
+    /**
+     * DAY_OF_WEEK return  1  2  3 	4  5  6	 7，偏移了一位
+     * 获取日期月份对应的结束偏移量,用于计算两个年份之间总共有多少周，不用于MonthView
+     * Test pass
+     *
+     * @param year      年
+     * @param month     月
+     * @param weekStart 周起始
+     * @return 获取日期月份对应的结束偏移量 the end diff in Month not MonthView
+     */
+    static int getMonthEndDiff(CalendarViewDelegate delegate, int year, int month, int weekStart) {
+        return getMonthEndDiff(delegate, year, month, getMonthDaysCount(year, month), weekStart);
+    }
 
     /**
      * DAY_OF_WEEK return  1  2  3 	4  5  6	 7，偏移了一位
@@ -266,10 +313,16 @@ public final class CalendarUtil {
      * @param weekStart 周起始
      * @return 获取日期月份对应的结束偏移量 the end diff in Month not MonthView
      */
-    private static int getMonthEndDiff(int year, int month, int day, int weekStart) {
-        java.util.Calendar date = java.util.Calendar.getInstance();
+    private static int getMonthEndDiff(CalendarViewDelegate delegate, int year, int month, int day, int weekStart) {
+        java.util.Calendar date;
+        if (delegate == null) {
+            date = java.util.Calendar.getInstance();
+        } else {
+            date = delegate.mCurrentDate.toCalendar();
+        }
+
         date.set(year, month - 1, day);
-        int week = date.get(java.util.Calendar.DAY_OF_WEEK);
+        int week = date.get(java.util.Calendar.DAY_OF_WEEK);//当前月的最后一天是星期几, 算出填满这一周还需要几天
         if (weekStart == CalendarViewDelegate.WEEK_START_WITH_SUN) {
             return 7 - week;
         }
@@ -277,6 +330,21 @@ public final class CalendarUtil {
             return week == 1 ? 0 : 7 - week + 1;
         }
         return week == 7 ? 6 : 7 - week - 1;
+    }
+
+    /**
+     * 以当前天为计算依旧, 计算需要补齐的天数
+     */
+    static int getMonthCurrentDayEndDiff(CalendarViewDelegate delegate, int year, int month, int weekStart) {
+        int currentDay = delegate.mCurrentDate.getDay();
+        int lastDay = getMonthDaysCount(year, month);
+        int diff1 = getMonthEndDiff(delegate, year, month, currentDay, weekStart);
+        //int diff2 = getMonthEndDiff(year, month, lastDay, weekStart);
+        if (currentDay + diff1 <= lastDay) {
+            //还在当前的月份, 则不需要补齐天数
+            return 0;
+        }
+        return diff1;
     }
 
     /**
@@ -291,7 +359,6 @@ public final class CalendarUtil {
         date.set(calendar.getYear(), calendar.getMonth() - 1, calendar.getDay());
         return date.get(java.util.Calendar.DAY_OF_WEEK) - 1;
     }
-
 
     /**
      * 获取周视图的切换默认选项位置 WeekView index
@@ -415,7 +482,7 @@ public final class CalendarUtil {
      * @param minYearMonth maxYear 最小年份月份，like : 2017-07
      * @param minYearDay   最小年份天
      * @param week         从最小年份minYear月minYearMonth 日1 开始的第几周 week > 0
-     * @param weekStart 周起始
+     * @param weekStart    周起始
      * @return 该星期的第一天日期
      */
     public static Calendar getFirstCalendarStartWithMinCalendar(int minYear, int minYearMonth, int minYearDay, int week, int weekStart) {
@@ -540,14 +607,20 @@ public final class CalendarUtil {
      * @param weekStar    weekStar
      * @return 为月视图初始化日历项
      */
-    static List<Calendar> initCalendarForMonthView(int year, int month, Calendar currentDate, int weekStar) {
+    static List<Calendar> initCalendarForMonthView(CalendarViewDelegate delegate, int year, int month, Calendar currentDate, int weekStar, boolean priorityWeekMode) {
         java.util.Calendar date = java.util.Calendar.getInstance();
 
         date.set(year, month - 1, 1);
 
-        int mPreDiff = getMonthViewStartDiff(year, month, weekStar);//获取月视图其实偏移量
-
-        int monthDayCount = getMonthDaysCount(year, month);//获取月份真实天数
+        int mPreDiff;
+        int monthDayCount;
+        if (priorityWeekMode) {
+            mPreDiff = getMonthCurrentDayStartDiff(delegate, year, month, weekStar);
+            //monthDayCount = currentDate.getDay();
+        } else {
+            mPreDiff = getMonthViewStartDiff(year, month, weekStar);//获取月视图的偏移量, 还需要补几天
+        }
+        monthDayCount = getMonthDaysCount(year, month);//获取月份真实天数
 
         int preYear, preMonth;
         int nextYear, nextMonth;
@@ -582,7 +655,14 @@ public final class CalendarUtil {
             if (i < mPreDiff) {
                 calendarDate.setYear(preYear);
                 calendarDate.setMonth(preMonth);
-                calendarDate.setDay(preMonthDaysCount - mPreDiff + i + 1);
+                int day = preMonthDaysCount - mPreDiff + i + 1;
+                if (priorityWeekMode && day <= 0) {
+                    int ppm = preMonth - 1;
+                    int ppd = CalendarUtil.getMonthDaysCount(preYear, ppm);
+                    calendarDate.setMonth(preMonth - 1);
+                    day += ppd;
+                }
+                calendarDate.setDay(day);
             } else if (i >= monthDayCount + mPreDiff) {
                 calendarDate.setYear(nextYear);
                 calendarDate.setMonth(nextMonth);
@@ -811,5 +891,75 @@ public final class CalendarUtil {
     static int dipToPx(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
+    }
+
+    /**
+     * 当前的日历, 也就是今天
+     */
+    /*public static Calendar currentCalendar() {
+        Calendar calendar = new Calendar();
+        Date d = new Date();
+        calendar.setYear(CalendarUtil.getDate("yyyy", d));
+        calendar.setMonth(CalendarUtil.getDate("MM", d));
+        calendar.setDay(CalendarUtil.getDate("dd", d));
+        calendar.setCurrentDay(true);
+        LunarCalendar.setupLunarCalendar(calendar);
+        return calendar;
+    }*/
+
+    /**
+     * 是否是今天所在的月份
+     */
+    public static boolean isCurrentMonth(CalendarViewDelegate delegate, int year, int month) {
+        Calendar currentCalendar = delegate.mCurrentDate;
+        return year == currentCalendar.getYear() && month == currentCalendar.getMonth();
+    }
+
+    /**
+     * 返回2个日期的间隔天数
+     */
+    public static long distance(Calendar max, Calendar min) {
+        long t1 = max.getTimeInMillis();
+        long t2 = min.getTimeInMillis();
+        return (long) Math.ceil((t1 - t2) * 1f / ONE_DAY);
+    }
+
+    public static List<Calendar> getBeforeCalendarList(int day) {
+        return getBeforeCalendarList(day, Integer.MAX_VALUE);
+    }
+
+    /**
+     * 获取今天开始的前多少天的日历(包含今天)
+     *
+     * @param day       需要获取的前多少天
+     * @param monthDiff 支持跨越的月份
+     */
+    public static List<Calendar> getBeforeCalendarList(int day, int monthDiff) {
+        List<Calendar> result = new ArrayList<>();
+        java.util.Calendar current = java.util.Calendar.getInstance();
+        int currentMonth = current.get(java.util.Calendar.MONTH);
+
+        for (int i = 0; i < day; i++) {
+            if (i > 0) {
+                current.add(java.util.Calendar.DAY_OF_MONTH, -1);
+            }
+
+            int month = current.get(java.util.Calendar.MONTH);
+            if (currentMonth - month > monthDiff) {
+                //跨越了很多个月, 则直接返回
+                break;
+            }
+
+            Calendar calendar = new Calendar();
+            calendar.setYear(current.get(java.util.Calendar.YEAR));
+            calendar.setMonth(month + 1);
+            calendar.setDay(current.get(java.util.Calendar.DAY_OF_MONTH));
+            calendar.setCurrentDay(i == 0);
+            LunarCalendar.setupLunarCalendar(calendar);
+
+            result.add(calendar);
+        }
+
+        return result;
     }
 }

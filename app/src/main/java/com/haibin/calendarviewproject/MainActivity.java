@@ -2,9 +2,6 @@ package com.haibin.calendarviewproject;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
-
-import androidx.appcompat.app.AlertDialog;
-
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarLayout;
@@ -22,6 +21,8 @@ import com.haibin.calendarviewproject.colorful.ColorfulActivity;
 import com.haibin.calendarviewproject.custom.CustomActivity;
 import com.haibin.calendarviewproject.full.FullActivity;
 import com.haibin.calendarviewproject.index.IndexActivity;
+import com.haibin.calendarviewproject.mark.SimpleMarkActivity;
+import com.haibin.calendarviewproject.mark.SimpleMarkActivity2;
 import com.haibin.calendarviewproject.meizu.MeiZuActivity;
 import com.haibin.calendarviewproject.meizu.MeiZuMonthView;
 import com.haibin.calendarviewproject.meizu.MeizuWeekView;
@@ -282,6 +283,8 @@ public class MainActivity extends BaseActivity implements
         findViewById(R.id.ll_custom).setOnClickListener(this);
         findViewById(R.id.ll_full).setOnClickListener(this);
         findViewById(R.id.ll_vertical).setOnClickListener(this);
+        findViewById(R.id.ll_simple_mark).setOnClickListener(this);
+        findViewById(R.id.ll_simple_mark2).setOnClickListener(this);
     }
 
     @Override
@@ -326,7 +329,6 @@ public class MainActivity extends BaseActivity implements
             case R.id.ll_flyme:
                 MeiZuActivity.show(this);
                 //CalendarActivity.show(this);
-
                 break;
             case R.id.ll_custom:
                 CustomActivity.show(this);
@@ -339,9 +341,6 @@ public class MainActivity extends BaseActivity implements
                 break;
             case R.id.ll_range:
                 RangeActivity.show(this);
-                break;
-            case R.id.ll_simple:
-                SimpleActivity.show(this);
                 break;
             case R.id.ll_colorful:
                 ColorfulActivity.show(this);
@@ -364,8 +363,17 @@ public class MainActivity extends BaseActivity implements
             case R.id.ll_progress:
                 ProgressActivity.show(this);
                 break;
+            case R.id.ll_simple:
+                SimpleActivity.show(this);
+                break;
             case R.id.ll_vertical:
                 VerticalActivity.show(this);
+                break;
+            case R.id.ll_simple_mark:
+                SimpleMarkActivity.show(this);
+                break;
+            case R.id.ll_simple_mark2:
+                SimpleMarkActivity2.show(this);
                 break;
         }
     }

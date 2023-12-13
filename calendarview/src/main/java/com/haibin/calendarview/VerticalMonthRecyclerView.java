@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
+ * 垂直列表排列月视图
+ * <p>
  * Email:angcyo@126.com
  *
  * @author angcyo

@@ -23,6 +23,8 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -91,6 +93,11 @@ public class CalendarViewDelegate {
      */
     public int mMonthViewShowMode;
 
+    /**
+     * 如果当前的月份, 包含今天, 那么强制将今天所在的周显示在视图底部,
+     * 并向上额外显示30天
+     */
+    public boolean monthPriorityShowWeekMode = false;
 
     /**
      * 默认选择模式
@@ -315,7 +322,6 @@ public class CalendarViewDelegate {
      */
     public Calendar mCurrentDate;
 
-
     private boolean mMonthViewScrollable,
             mWeekViewScrollable,
             mYearViewScrollable;
@@ -395,7 +401,7 @@ public class CalendarViewDelegate {
 
     /**
      * 2021-10-21
-     * */
+     */
     CalendarView.OnClassInitializeListener mClassInitializeListener;
 
     CalendarView.OnVerticalItemInitializeListener mVerticalItemInitializeListener;
@@ -424,8 +430,26 @@ public class CalendarViewDelegate {
 
     private int mMinSelectRange, mMaxSelectRange;
 
-    /**是否显示年视图, 预览模式下有效*/
+    /**
+     * 是否显示年视图, 预览模式下有效
+     */
     boolean showYearView = false;
+
+    /**
+     * 星期资源文本id
+     */
+    public int weekStringResId = R.array.week_string_array;
+
+    /**
+     * 月份资源文本id
+     */
+    public int monthStringResId = R.array.month_string_array;
+
+    /**
+     * 预览的日期, 格式必须是yyyyMMdd.
+     * 请使用`tools:preview_calendar`
+     */
+    public String previewCalendar = null;
 
     CalendarViewDelegate(Context context, @Nullable AttributeSet attrs) {
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CalendarView);
@@ -468,6 +492,7 @@ public class CalendarViewDelegate {
                 FIRST_DAY_OF_MONTH);
 
         mMonthViewShowMode = array.getInt(R.styleable.CalendarView_month_view_show_mode, MODE_ALL_MONTH);
+        monthPriorityShowWeekMode = array.getBoolean(R.styleable.CalendarView_month_priority_show_week_mode, monthPriorityShowWeekMode);
         mWeekStart = array.getInt(R.styleable.CalendarView_week_start_with, WEEK_START_WITH_SUN);
         mSelectMode = array.getInt(R.styleable.CalendarView_select_mode, SELECT_MODE_DEFAULT);
         mMaxMultiSelectSize = array.getInt(R.styleable.CalendarView_max_multi_select_size, Integer.MAX_VALUE);
@@ -533,6 +558,10 @@ public class CalendarViewDelegate {
                 CalendarUtil.dipToPx(context, 12));
         showYearView = array.getBoolean(R.styleable.CalendarView_year_view_show, showYearView);
 
+        weekStringResId = array.getResourceId(R.styleable.CalendarView_week_string_id, weekStringResId);
+        monthStringResId = array.getResourceId(R.styleable.CalendarView_month_string_id, monthStringResId);
+        previewCalendar = array.getString(R.styleable.CalendarView_preview_calendar);
+
         if (mYearViewPadding != 0) {
             mYearViewPaddingLeft = mYearViewPadding;
             mYearViewPaddingRight = mYearViewPadding;
@@ -557,6 +586,15 @@ public class CalendarViewDelegate {
     protected void init() {
         mCurrentDate = new Calendar();
         Date d = new Date();
+        if (!TextUtils.isEmpty(previewCalendar)) {
+            SimpleDateFormat format = (SimpleDateFormat) SimpleDateFormat.getInstance();
+            format.applyPattern("yyyyMMdd");
+            try {
+                d = format.parse(previewCalendar);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
         mCurrentDate.setYear(CalendarUtil.getDate("yyyy", d));
         mCurrentDate.setMonth(CalendarUtil.getDate("MM", d));
         mCurrentDate.setDay(CalendarUtil.getDate("dd", d));
@@ -642,7 +680,7 @@ public class CalendarViewDelegate {
         return mWeekTextColor;
     }
 
-    int getSchemeTextColor() {
+    public int getSchemeTextColor() {
         return mSchemeTextColor;
     }
 

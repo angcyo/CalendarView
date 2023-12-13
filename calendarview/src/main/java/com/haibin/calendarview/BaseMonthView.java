@@ -68,8 +68,8 @@ public abstract class BaseMonthView extends BaseView {
         mYear = year;
         mMonth = month;
         initCalendar();
-        int newHeight = CalendarUtil.getMonthViewHeight(year, month, mItemHeight, mDelegate.getWeekStart(),
-                mDelegate.getMonthViewShowMode());
+        int newHeight = CalendarUtil.getMonthViewHeight(year, month, mItemHeight,
+                mDelegate.getWeekStart(), mDelegate);
         if (mHeight != newHeight) {
             requestLayout();
         }
@@ -82,11 +82,20 @@ public abstract class BaseMonthView extends BaseView {
     @SuppressLint("WrongConstant")
     private void initCalendar() {
 
-        mNextDiff = CalendarUtil.getMonthEndDiff(mYear, mMonth, mDelegate.getWeekStart());
-        int preDiff = CalendarUtil.getMonthViewStartDiff(mYear, mMonth, mDelegate.getWeekStart());
-        int monthDayCount = CalendarUtil.getMonthDaysCount(mYear, mMonth);
-
-        mItems = CalendarUtil.initCalendarForMonthView(mYear, mMonth, mDelegate.getCurrentDay(), mDelegate.getWeekStart());
+        int preDiff;
+        int monthDayCount;
+        boolean isCurrentMonth = CalendarUtil.isCurrentMonth(mDelegate, mYear, mMonth);
+        boolean priorityWeekMode = mDelegate.monthPriorityShowWeekMode && isCurrentMonth;
+        if (priorityWeekMode) {
+            mNextDiff = CalendarUtil.getMonthCurrentDayEndDiff(mDelegate, mYear, mMonth, mDelegate.getWeekStart());
+            preDiff = CalendarUtil.getMonthCurrentDayStartDiff(mDelegate, mYear, mMonth, mDelegate.getWeekStart());
+            monthDayCount = mDelegate.mCurrentDate.getDay();
+        } else {
+            mNextDiff = CalendarUtil.getMonthEndDiff(mDelegate, mYear, mMonth, mDelegate.getWeekStart());
+            preDiff = CalendarUtil.getMonthViewStartDiff(mYear, mMonth, mDelegate.getWeekStart());
+            monthDayCount = CalendarUtil.getMonthDaysCount(mYear, mMonth);
+        }
+        mItems = CalendarUtil.initCalendarForMonthView(mDelegate, mYear, mMonth, mDelegate.getCurrentDay(), mDelegate.getWeekStart(), priorityWeekMode);
 
         if (mItems.contains(mDelegate.getCurrentDay())) {
             mCurrentItem = mItems.indexOf(mDelegate.getCurrentDay());
@@ -102,6 +111,8 @@ public abstract class BaseMonthView extends BaseView {
 
         if (mDelegate.getMonthViewShowMode() == CalendarViewDelegate.MODE_ALL_MONTH) {
             mLineCount = 6;
+        } else if (priorityWeekMode) {
+            mLineCount = (int) (Math.ceil((preDiff + monthDayCount + mNextDiff) / 7f));
         } else {
             mLineCount = (preDiff + monthDayCount + mNextDiff) / 7;
         }
@@ -175,8 +186,10 @@ public abstract class BaseMonthView extends BaseView {
      */
     final void setSelectedCalendar(Calendar calendar) {
         mCurrentItem = mItems.indexOf(calendar);
+        if (onCalendarIntercept(calendar)) {
+            mCurrentItem = -1;
+        }
     }
-
 
     /**
      * 更新显示模式
@@ -184,8 +197,8 @@ public abstract class BaseMonthView extends BaseView {
     final void updateShowMode() {
         mLineCount = CalendarUtil.getMonthViewLineCount(mYear, mMonth,
                 mDelegate.getWeekStart(), mDelegate.getMonthViewShowMode());
-        mHeight = CalendarUtil.getMonthViewHeight(mYear, mMonth, mItemHeight, mDelegate.getWeekStart(),
-                mDelegate.getMonthViewShowMode());
+        mHeight = CalendarUtil.getMonthViewHeight(mYear, mMonth, mItemHeight,
+                mDelegate.getWeekStart(), mDelegate);
         invalidate();
     }
 
@@ -194,15 +207,15 @@ public abstract class BaseMonthView extends BaseView {
      */
     final void updateWeekStart() {
         initCalendar();
-        mHeight = CalendarUtil.getMonthViewHeight(mYear, mMonth, mItemHeight, mDelegate.getWeekStart(),
-                mDelegate.getMonthViewShowMode());
+        mHeight = CalendarUtil.getMonthViewHeight(mYear, mMonth, mItemHeight,
+                mDelegate.getWeekStart(), mDelegate);
     }
 
     @Override
     void updateItemHeight() {
         super.updateItemHeight();
-        int newHeight  = CalendarUtil.getMonthViewHeight(mYear, mMonth, mItemHeight, mDelegate.getWeekStart(),
-                mDelegate.getMonthViewShowMode());
+        int newHeight = CalendarUtil.getMonthViewHeight(mYear, mMonth, mItemHeight,
+                mDelegate.getWeekStart(), mDelegate);
         if (mHeight != newHeight) {
             requestLayout();
         }
@@ -222,7 +235,6 @@ public abstract class BaseMonthView extends BaseView {
         }
         invalidate();
     }
-
 
     /**
      * 获取选中的下标

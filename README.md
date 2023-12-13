@@ -22,17 +22,16 @@
 ## 效果图
 
 垂直滚动 | 垂直列表
- ---     | ---
+ ---    | ---
 ![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/gif_vertical_scroll.gif)|![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/gif_vertical_list.gif)
 
 月视图动画 | 周视图动画
- ---       | ---
+ ---      | ---
 ![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/gif_month_anim.gif)|![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/gif_week_anim.gif)
 
-按下效果 | --
- ---     | ---
-![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/gif_touch_down.gif) | --
-
+按下效果 | 其它月份预览
+ ---    | ---
+![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/gif_touch_down.gif) | ![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/mark_month_view.png)
 
 # 使用方式如下:
 
@@ -50,7 +49,7 @@ allprojects {
 ## 加入依赖
 
 ```
-implementation 'com.github.angcyo:CalendarView:3.7.1.27'
+implementation 'com.github.angcyo:CalendarView:3.7.1.37'
 ```
 
 ### `垂直滚动日历`使用方式

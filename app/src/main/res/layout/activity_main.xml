@@ -10,7 +10,6 @@
     tools:context="com.haibin.calendarviewproject.MainActivity"
     tools:ignore="RtlHardcoded,HardcodedText,RtlSymmetry,SmallSp">
 
-
     <RelativeLayout
         android:id="@+id/rl_tool"
         android:layout_width="match_parent"
@@ -33,10 +32,10 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/tv_month_day"
             android:orientation="vertical"
-            android:paddingBottom="12dp"
             android:paddingLeft="6dp"
-            android:paddingRight="6dp"
             android:paddingTop="12dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="12dp"
             tools:ignore="RelativeOverlap">
 
             <TextView
@@ -147,6 +146,7 @@
             app:min_year_day="1"
             app:min_year_month="1"
             app:month_view="com.haibin.calendarviewproject.custom.CustomMonthView"
+            app:month_view_auto_select_day="last_select_day_ignore_current"
             app:month_view_show_mode="mode_only_current"
             app:other_month_lunar_text_color="#e1e1e1"
             app:other_month_text_color="#e1e1e1"
@@ -167,7 +167,6 @@
             app:week_view="com.haibin.calendarviewproject.custom.CustomWeekView"
             app:year_view_background="#f6f6f6"
             app:year_view_day_text_color="#333333"
-            app:month_view_auto_select_day="last_select_day_ignore_current"
             app:year_view_day_text_size="8sp"
             app:year_view_month_text_color="#ff0000"
             app:year_view_month_text_size="20sp"
@@ -208,8 +207,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -251,8 +250,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -294,8 +293,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -337,8 +336,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -381,8 +380,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -425,8 +424,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -468,8 +467,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -512,8 +511,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -556,8 +555,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -599,8 +598,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -644,8 +643,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -688,8 +687,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -709,7 +708,6 @@
                             android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
-
 
                 <View
                     android:layout_width="match_parent"
@@ -732,8 +730,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -775,14 +773,14 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="垂直日历"
+                            android:text="垂直日历 new"
                             android:textColor="#333333"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -792,6 +790,92 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="垂直方向排列的日历"
+                            android:textColor="#666666"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/line_color" />
+
+                <LinearLayout
+                    android:id="@+id/ll_simple_mark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="39dp"
+                        android:layout_height="39dp"
+                        android:layout_margin="16dp"
+                        android:contentDescription="flyme"
+                        android:src="@mipmap/ic_simple_logo" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="圆形标记 new"
+                            android:textColor="#333333"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="打卡圆形标记的日历"
+                            android:textColor="#666666"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/line_color" />
+
+                <LinearLayout
+                    android:id="@+id/ll_simple_mark2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="39dp"
+                        android:layout_height="39dp"
+                        android:layout_margin="16dp"
+                        android:contentDescription="flyme"
+                        android:src="@mipmap/ic_simple_logo" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="圆形标记2 new"
+                            android:textColor="#333333"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="打卡圆形标记的日历"
                             android:textColor="#666666"
                             android:textSize="14sp" />
                     </LinearLayout>

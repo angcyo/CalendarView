@@ -55,7 +55,9 @@ public final class MonthViewPager extends ViewPager {
      */
     private boolean isUsingScrollToCalendar = false;
 
-    /**pager 方向*/
+    /**
+     * pager 方向
+     */
     private int orientation = LinearLayout.HORIZONTAL;
 
     public MonthViewPager(Context context) {
@@ -220,33 +222,33 @@ public final class MonthViewPager extends ViewPager {
                 ViewGroup.LayoutParams params = getLayoutParams();
                 params.height = CalendarUtil.getMonthViewHeight(year, month,
                         mDelegate.getCalendarItemHeight(), mDelegate.getWeekStart(),
-                        mDelegate.getMonthViewShowMode());
+                        mDelegate);
                 setLayoutParams(params);
             }
             mParentLayout.updateContentViewTranslateY();
         }
         mCurrentViewHeight = CalendarUtil.getMonthViewHeight(year, month,
                 mDelegate.getCalendarItemHeight(), mDelegate.getWeekStart(),
-                mDelegate.getMonthViewShowMode());
+                mDelegate);
         if (month == 1) {
             mPreViewHeight = CalendarUtil.getMonthViewHeight(year - 1, 12,
                     mDelegate.getCalendarItemHeight(), mDelegate.getWeekStart(),
-                    mDelegate.getMonthViewShowMode());
+                    mDelegate);
             mNextViewHeight = CalendarUtil.getMonthViewHeight(year, 2,
                     mDelegate.getCalendarItemHeight(), mDelegate.getWeekStart(),
-                    mDelegate.getMonthViewShowMode());
+                    mDelegate);
         } else {
             mPreViewHeight = CalendarUtil.getMonthViewHeight(year, month - 1,
                     mDelegate.getCalendarItemHeight(), mDelegate.getWeekStart(),
-                    mDelegate.getMonthViewShowMode());
+                    mDelegate);
             if (month == 12) {
                 mNextViewHeight = CalendarUtil.getMonthViewHeight(year + 1, 1,
                         mDelegate.getCalendarItemHeight(), mDelegate.getWeekStart(),
-                        mDelegate.getMonthViewShowMode());
+                        mDelegate);
             } else {
                 mNextViewHeight = CalendarUtil.getMonthViewHeight(year, month + 1,
                         mDelegate.getCalendarItemHeight(), mDelegate.getWeekStart(),
-                        mDelegate.getMonthViewShowMode());
+                        mDelegate);
             }
         }
     }
@@ -415,6 +417,21 @@ public final class MonthViewPager extends ViewPager {
         return view.mItems;
     }
 
+    public BaseMonthView getCurrentMonthView() {
+        return findViewWithTag(getCurrentItem());
+    }
+
+    /**
+     * 获取当前月份的行数
+     */
+    int getCurrentMonthLines() {
+        BaseMonthView view = findViewWithTag(getCurrentItem());
+        if (view == null) {
+            return -1;
+        }
+        return view.mLineCount;
+    }
+
     /**
      * 更新为默认选择模式
      */
@@ -548,26 +565,26 @@ public final class MonthViewPager extends ViewPager {
         int month = mDelegate.mIndexCalendar.getMonth();
         mCurrentViewHeight = CalendarUtil.getMonthViewHeight(year, month,
                 mDelegate.getCalendarItemHeight(), mDelegate.getWeekStart(),
-                mDelegate.getMonthViewShowMode());
+                mDelegate);
         if (month == 1) {
             mPreViewHeight = CalendarUtil.getMonthViewHeight(year - 1, 12,
                     mDelegate.getCalendarItemHeight(), mDelegate.getWeekStart(),
-                    mDelegate.getMonthViewShowMode());
+                    mDelegate);
             mNextViewHeight = CalendarUtil.getMonthViewHeight(year, 2,
                     mDelegate.getCalendarItemHeight(), mDelegate.getWeekStart(),
-                    mDelegate.getMonthViewShowMode());
+                    mDelegate);
         } else {
             mPreViewHeight = CalendarUtil.getMonthViewHeight(year, month - 1,
                     mDelegate.getCalendarItemHeight(), mDelegate.getWeekStart(),
-                    mDelegate.getMonthViewShowMode());
+                    mDelegate);
             if (month == 12) {
                 mNextViewHeight = CalendarUtil.getMonthViewHeight(year + 1, 1,
                         mDelegate.getCalendarItemHeight(), mDelegate.getWeekStart(),
-                        mDelegate.getMonthViewShowMode());
+                        mDelegate);
             } else {
                 mNextViewHeight = CalendarUtil.getMonthViewHeight(year, month + 1,
                         mDelegate.getCalendarItemHeight(), mDelegate.getWeekStart(),
-                        mDelegate.getMonthViewShowMode());
+                        mDelegate);
             }
         }
         ViewGroup.LayoutParams params = getLayoutParams();
@@ -638,7 +655,7 @@ public final class MonthViewPager extends ViewPager {
         if (mDelegate.isMonthViewScrollable()) {
             if (orientation == LinearLayout.VERTICAL) {
                 return super.onInterceptTouchEvent(swapTouchEvent(ev));
-            }else {
+            } else {
                 return super.onInterceptTouchEvent(ev);
             }
         }
@@ -670,6 +687,9 @@ public final class MonthViewPager extends ViewPager {
         return orientation;
     }
 
+    /**
+     * 设置滚动方向, 如:垂直滚动, 水平滚动
+     */
     public void setOrientation(int orientation) {
         setOrientation(orientation, new DefaultVerticalTransformer());
     }

@@ -53,6 +53,7 @@ public abstract class WeekView extends BaseWeekView {
                 }
             }
             Calendar calendar = mItems.get(i);
+            calendar.setDrawIndex(i);
             drawCalendar(canvas, calendar, x, isSelected);
         }
 

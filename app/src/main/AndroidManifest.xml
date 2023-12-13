@@ -13,7 +13,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,22 +23,60 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".meizu.MeiZuActivity" />
-        <activity android:name=".multi.MultiActivity" />
-        <activity android:name=".index.IndexActivity" />
-        <activity android:name=".simple.SimpleActivity" />
-        <activity android:name=".range.RangeActivity" />
-        <activity android:name=".colorful.ColorfulActivity" />
-        <activity android:name=".solay.SolarActivity" />
-        <activity android:name=".single.SingleActivity" />
-        <activity android:name=".progress.ProgressActivity" />
-        <activity android:name=".custom.CustomActivity" />
-        <activity android:name=".mix.MixActivity" />
-        <activity android:name=".pager.ViewPagerActivity" />
-        <activity android:name=".full.FullActivity" />
-        <activity android:name=".TestActivity" />
-        <activity android:name=".CalendarActivity" />
-        <activity android:name=".VerticalActivity" />
+        <activity
+            android:name=".meizu.MeiZuActivity"
+            android:exported="true" />
+        <activity
+            android:name=".multi.MultiActivity"
+            android:exported="true" />
+        <activity
+            android:name=".index.IndexActivity"
+            android:exported="true" />
+        <activity
+            android:name=".simple.SimpleActivity"
+            android:exported="true" />
+        <activity
+            android:name=".range.RangeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".colorful.ColorfulActivity"
+            android:exported="true" />
+        <activity
+            android:name=".solay.SolarActivity"
+            android:exported="true" />
+        <activity
+            android:name=".single.SingleActivity"
+            android:exported="true" />
+        <activity
+            android:name=".progress.ProgressActivity"
+            android:exported="true" />
+        <activity
+            android:name=".custom.CustomActivity"
+            android:exported="true" />
+        <activity
+            android:name=".mix.MixActivity"
+            android:exported="true" />
+        <activity
+            android:name=".pager.ViewPagerActivity"
+            android:exported="true" />
+        <activity
+            android:name=".full.FullActivity"
+            android:exported="true" />
+        <activity
+            android:name=".TestActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CalendarActivity"
+            android:exported="true" />
+        <activity
+            android:name=".VerticalActivity"
+            android:exported="true" />
+        <activity
+            android:name=".mark.SimpleMarkActivity"
+            android:exported="true" />
+        <activity
+            android:name=".mark.SimpleMarkActivity2"
+            android:exported="true" />
     </application>
 
 </manifest>

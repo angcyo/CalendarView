@@ -51,7 +51,7 @@ public class CustomYearView extends YearView {
 
         String text = getContext()
                 .getResources()
-                .getStringArray(com.haibin.calendarview.R.array.month_string_array)[month - 1];
+                .getStringArray(mDelegate.monthStringResId)[month - 1];
         canvas.drawText(text,
                 x + mItemWidth / 2 - mTextPadding,
                 y + mMonthTextBaseLine,
@@ -79,7 +79,6 @@ public class CustomYearView extends YearView {
     private static boolean isLeapYear(int year) {
         return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
     }
-
 
 
     @Override

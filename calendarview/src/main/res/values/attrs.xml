@@ -80,6 +80,12 @@
         <attr name="week_view_scrollable" format="boolean" />
         <!--年视图是否可滚动-->
         <attr name="year_view_scrollable" format="boolean" />
+        <!---如果当前的月份, 包含今天, 那么强制将今天所在的周显示在视图底部, 并向上额外显示30天-->
+        <attr name="month_priority_show_week_mode" format="boolean" />
+        <attr name="week_string_id" format="reference" />
+        <attr name="month_string_id" format="reference" />
+        <!--预览的日期, 请使用tools标签, tools:preview_calendar-->
+        <attr name="preview_calendar" format="string" />
 
         <!-- 月份显示模式 -->
         <attr name="month_view_show_mode">

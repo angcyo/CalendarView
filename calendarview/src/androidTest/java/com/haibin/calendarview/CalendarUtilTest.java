@@ -1,8 +1,8 @@
 package com.haibin.calendarview;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  * 新版月视图算法测试
@@ -13,16 +13,16 @@ public class CalendarUtilTest {
     @Test
     public void getMonthViewHeight() throws Exception {
         //周一起始
-        assertEquals(5, CalendarUtil.getMonthViewHeight(2018, 4, 1, 1));
-        assertEquals(5, CalendarUtil.getMonthViewHeight(2018, 5, 1, 1));
-        assertEquals(5, CalendarUtil.getMonthViewHeight(2018, 6, 1, 1));
-        assertEquals(6, CalendarUtil.getMonthViewHeight(2018, 9, 1, 1));
+        assertEquals(5, CalendarUtil.calcMonthViewHeight(2018, 4, 1, 1));
+        assertEquals(5, CalendarUtil.calcMonthViewHeight(2018, 5, 1, 1));
+        assertEquals(5, CalendarUtil.calcMonthViewHeight(2018, 6, 1, 1));
+        assertEquals(6, CalendarUtil.calcMonthViewHeight(2018, 9, 1, 1));
 
         //周一起始
-        assertEquals(6, CalendarUtil.getMonthViewHeight(2018, 4, 1, 2));
-        assertEquals(5, CalendarUtil.getMonthViewHeight(2018, 5, 1, 2));
-        assertEquals(5, CalendarUtil.getMonthViewHeight(2018, 6, 1, 2));
-        assertEquals(6, CalendarUtil.getMonthViewHeight(2018, 7, 1, 2));
+        assertEquals(6, CalendarUtil.calcMonthViewHeight(2018, 4, 1, 2));
+        assertEquals(5, CalendarUtil.calcMonthViewHeight(2018, 5, 1, 2));
+        assertEquals(5, CalendarUtil.calcMonthViewHeight(2018, 6, 1, 2));
+        assertEquals(6, CalendarUtil.calcMonthViewHeight(2018, 7, 1, 2));
     }
 
     /**
@@ -174,8 +174,8 @@ public class CalendarUtilTest {
 
     @Test
     public void getWeekCountDiff() throws Exception {
-        int diff = CalendarUtil.getWeekViewEndDiff(2020,4,2,1);
-        assertEquals(2,diff);
+        int diff = CalendarUtil.getWeekViewEndDiff(2020, 4, 2, 1);
+        assertEquals(2, diff);
     }
 
 
@@ -198,8 +198,7 @@ public class CalendarUtilTest {
         calendar.setMonth(4);
         calendar.setDay(24);
 
-        CalendarUtil.initCalendarForMonthView(2018, 4, calendar, 1);
-
+        CalendarUtil.initCalendarForMonthView(2018, 4, calendar, 1, false);
     }
 
     @Test
@@ -261,7 +260,7 @@ public class CalendarUtilTest {
         calendar2.setMonth(4);
         calendar2.setDay(3);
 
-        assertEquals(-2,CalendarUtil.differ(calendar1,calendar2));
+        assertEquals(-2, CalendarUtil.differ(calendar1, calendar2));
 
         calendar1.setYear(2018);
         calendar1.setMonth(9);
@@ -271,7 +270,7 @@ public class CalendarUtilTest {
         calendar2.setMonth(9);
         calendar2.setDay(1);
 
-        assertEquals(29,CalendarUtil.differ(calendar1,calendar2));
+        assertEquals(29, CalendarUtil.differ(calendar1, calendar2));
 
         calendar1.setYear(2018);
         calendar1.setMonth(9);
@@ -281,6 +280,6 @@ public class CalendarUtilTest {
         calendar2.setMonth(9);
         calendar2.setDay(5);
 
-        assertEquals(7,CalendarUtil.differ(calendar1,calendar2));
+        assertEquals(7, CalendarUtil.differ(calendar1, calendar2));
     }
 }

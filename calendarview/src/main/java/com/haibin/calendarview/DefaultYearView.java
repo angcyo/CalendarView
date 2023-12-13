@@ -38,7 +38,7 @@ public class DefaultYearView extends YearView {
 
         String text = getContext()
                 .getResources()
-                .getStringArray(R.array.month_string_array)[month - 1];
+                .getStringArray(mDelegate.monthStringResId)[month - 1];
 
         canvas.drawText(text,
                 x + mItemWidth / 2 - mTextPadding,

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.haibin.calendarviewproject.mark.SimpleMarkActivity"
+    tools:ignore="RtlHardcoded,HardcodedText,RtlSymmetry,SmallSp">
+
+    <RelativeLayout
+        android:id="@+id/rl_tool"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="#0D437AFF">
+
+        <TextView
+            android:id="@+id/tv_month_day"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:textColor="#363C54"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry"
+            tools:text="30天训练 4月2日-5月2日" />
+
+        <FrameLayout
+            android:id="@+id/fl_current"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/bg_ripple">
+
+            <ImageView
+                android:id="@+id/ib_calendar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_calendar"
+                app:tint="#000000" />
+
+            <TextView
+                android:id="@+id/tv_current_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                tools:text="13" />
+        </FrameLayout>
+
+    </RelativeLayout>
+
+    <com.haibin.calendarview.CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0D437AFF"
+        app:calendar_height="80dp"
+        app:calendar_padding="0dp"
+        app:current_day_text_color="#06AD95"
+        app:current_month_text_color="#363C54"
+        app:day_text_size="13dp"
+        app:min_year="2004"
+        app:month_priority_show_week_mode="true"
+        app:month_string_id="@array/month_string_array_en"
+        app:month_view="com.haibin.calendarviewproject.mark.MarkMonthView"
+        app:month_view_scrollable="false"
+        app:month_view_show_mode="mode_fix"
+        app:other_month_text_color="#848897"
+        app:scheme_text_color="#fff"
+        app:scheme_theme_color="#457bf7"
+        app:select_mode="single_mode"
+        app:selected_text_color="#fff"
+        app:selected_theme_color="#457bf7"
+        app:week_background="#00000000"
+        app:week_bar_height="50dp"
+        app:week_start_with="mon"
+        app:week_string_id="@array/week_string_array_cn"
+        app:week_text_color="#484848"
+        app:week_text_size="14dp"
+        app:week_view="com.haibin.calendarviewproject.mark.MarkWeekView"
+        app:week_view_scrollable="false"
+        app:year_view_scrollable="false" />
+
+</LinearLayout>

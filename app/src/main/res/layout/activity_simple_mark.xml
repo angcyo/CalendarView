@@ -7,9 +7,8 @@
     android:background="#ffffff"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.haibin.calendarviewproject.MainActivity"
+    tools:context="com.haibin.calendarviewproject.mark.SimpleMarkActivity"
     tools:ignore="RtlHardcoded,HardcodedText,RtlSymmetry,SmallSp">
-
 
     <RelativeLayout
         android:id="@+id/rl_tool"
@@ -103,26 +102,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
-            app:calendar_height="46dp"
-            app:calendar_padding="10dp"
-            app:current_month_lunar_text_color="#CFCFCF"
-            app:current_month_text_color="#333333"
+            app:calendar_height="50dp"
+            app:calendar_padding="0dp"
+            app:current_day_text_color="#00b497"
+            app:current_month_text_color="#3d4053"
             app:min_year="2004"
-            app:month_view="com.haibin.calendarviewproject.simple.SimpleMonthView"
-            app:other_month_text_color="#e1e1e1"
-            app:scheme_text="假"
-            app:scheme_text_color="#333"
-            app:scheme_theme_color="#333"
+            app:month_priority_show_week_mode="true"
+            app:month_view="com.haibin.calendarviewproject.mark.MarkMonthView"
+            app:month_view_show_mode="mode_fix"
+            app:other_month_text_color="#999ca5"
+            app:scheme_text_color="#fff"
+            app:scheme_theme_color="#457bf7"
             app:selected_text_color="#fff"
-            app:selected_theme_color="#333"
-            app:week_background="#fff"
-            app:week_text_color="#111"
-            app:week_view="com.haibin.calendarviewproject.simple.SimpleWeekView"
-            app:year_view_day_text_color="#333333"
-            app:year_view_day_text_size="9sp"
-            app:year_view_month_text_color="#ff0000"
-            app:year_view_month_text_size="20sp"
-            app:year_view_scheme_color="#f17706" />
+            app:selected_theme_color="#457bf7"
+            app:week_start_with="mon"
+            app:week_view="com.haibin.calendarviewproject.mark.MarkWeekView" />
 
         <com.haibin.calendarviewproject.group.GroupRecyclerView
             android:id="@+id/recyclerView"

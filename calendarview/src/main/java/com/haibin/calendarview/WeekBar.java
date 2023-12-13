@@ -127,7 +127,7 @@ public class WeekBar extends LinearLayout {
      * @return 或者周文本
      */
     private String getWeekString(int index, int weekStart) {
-        String[] weeks = getContext().getResources().getStringArray(R.array.week_string_array);
+        String[] weeks = getContext().getResources().getStringArray(mDelegate.weekStringResId);
 
         if (weekStart == CalendarViewDelegate.WEEK_START_WITH_SUN) {
             return weeks[index];

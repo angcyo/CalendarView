@@ -58,10 +58,15 @@ public abstract class MonthView extends BaseMonthView {
                             //预览选中的效果
                             mCurrentItem = d;
                         } else {
-                            //预览scheme效果
+                            //预览当月scheme效果
                             if (!calendar.hasScheme() && i == 1 && j == 0) {
                                 calendar.setScheme(mDelegate.getSchemeText());
                             }
+                        }
+                    } else {
+                        //预览其他月scheme效果
+                        if (!calendar.hasScheme() && i == 0 && j == 0) {
+                            calendar.setScheme(mDelegate.getSchemeText());
                         }
                     }
                 }
@@ -78,6 +83,7 @@ public abstract class MonthView extends BaseMonthView {
                         return;
                     }
                 }
+                calendar.setDrawIndex(d);
                 draw(canvas, calendar, i, j, d);
                 ++d;
             }
@@ -106,7 +112,9 @@ public abstract class MonthView extends BaseMonthView {
         drawCalendar(canvas, calendar, x, y, isSelected);
     }
 
-    /**在指定的x,y绘制日历*/
+    /**
+     * 在指定的x,y绘制日历
+     */
     protected void drawCalendar(Canvas canvas, Calendar calendar, int x, int y, boolean isSelected) {
         onLoopStart(x, y);
 
@@ -134,6 +142,7 @@ public abstract class MonthView extends BaseMonthView {
     @Override
     public void onClick(View v) {
         if (!isClick) {
+            isClick = true;
             return;
         }
         Calendar calendar = getIndex();
@@ -152,7 +161,6 @@ public abstract class MonthView extends BaseMonthView {
             return;
         }
 
-
         if (!isInRange(calendar)) {
             if (mDelegate.mCalendarSelectListener != null) {
                 mDelegate.mCalendarSelectListener.onCalendarOutOfRange(calendar);
@@ -163,13 +171,20 @@ public abstract class MonthView extends BaseMonthView {
         int clickIndex = mItems.indexOf(calendar);
         int oldItem = mCurrentItem;
         mCurrentItem = clickIndex;
-        if (calendar.isCurrentMonth() && oldItem != -1 && oldItem != mCurrentItem) {
+
+        if (!mDelegate.isMonthViewScrollable() && clickIndex != -1) {
+            //不可以滚动的情况下, 需要动画
+            onChangeItemTo(oldItem, mCurrentItem);
+        } else if (calendar.isCurrentMonth() && oldItem != -1 && oldItem != mCurrentItem) {
             onChangeItemTo(oldItem, mCurrentItem);
         }
 
-        if (!calendar.isCurrentMonth() && mMonthViewPager != null) {
+        if (!calendar.isCurrentMonth() && mMonthViewPager != null && mDelegate.isMonthViewScrollable()) {
             int cur = mMonthViewPager.getCurrentItem();
-            int position = mCurrentItem < 7 ? cur - 1 : cur + 1;
+            int clickMonth = calendar.getMonth();
+            int position;
+            position = cur - (mMonth - clickMonth);
+            //position = mCurrentItem < 7 ? cur - 1 : cur + 1;
             mMonthViewPager.setCurrentItem(position);
         }
 
@@ -183,7 +198,6 @@ public abstract class MonthView extends BaseMonthView {
             } else {
                 mParentLayout.updateSelectWeek(CalendarUtil.getWeekFromDayInMonth(calendar, mDelegate.getWeekStart()));
             }
-
         }
 
         if (mDelegate.mCalendarSelectListener != null) {
@@ -230,7 +244,6 @@ public abstract class MonthView extends BaseMonthView {
             return true;
         }
 
-
         mCurrentItem = mItems.indexOf(calendar);
 
         if (!calendar.isCurrentMonth() && mMonthViewPager != null) {
@@ -249,7 +262,6 @@ public abstract class MonthView extends BaseMonthView {
             } else {
                 mParentLayout.updateSelectWeek(CalendarUtil.getWeekFromDayInMonth(calendar, mDelegate.getWeekStart()));
             }
-
         }
 
         if (mDelegate.mCalendarSelectListener != null) {
