@@ -19,6 +19,8 @@
 
 > 日期切换时, 有动画效果
 
+- `支持月份日期切换动画控制` `>=3.7.1.43`
+
 ## 效果图
 
 垂直滚动 | 垂直列表
@@ -49,7 +51,7 @@ allprojects {
 ## 加入依赖
 
 ```
-implementation 'com.github.angcyo:CalendarView:3.7.1.37'
+implementation 'com.github.angcyo:CalendarView:3.7.1.43'
 ```
 
 ### `垂直滚动日历`使用方式
@@ -143,6 +145,22 @@ public static Calendar getCalendarWidthDiffer(Calendar calendar, long millis) {
 }
 ```
 
+## ChangeLog
+
+### 3.7.1.43
+
+- `支持月份日期切换动画控制`
+
+`CalendarView#enable_month_animation`
+
+```diff
+<com.haibin.calendarview.CalendarView
+   ...
++  app:enable_month_animation="false"
+   ...
+  />
+```
+ 
 ---
 
 # CalenderView
