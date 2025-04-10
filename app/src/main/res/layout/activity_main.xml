@@ -138,6 +138,7 @@
             app:current_day_text_color="#ff0000"
             app:current_month_lunar_text_color="#CFCFCF"
             app:current_month_text_color="#333333"
+            app:enable_month_animation="true"
             app:lunar_text_size="10sp"
             app:max_year="2050"
             app:max_year_day="31"
