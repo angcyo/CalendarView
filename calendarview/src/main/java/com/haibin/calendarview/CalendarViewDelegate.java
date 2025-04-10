@@ -451,6 +451,9 @@ public class CalendarViewDelegate {
      */
     public String previewCalendar = null;
 
+    /**是否激活月份选中日期的动画*/
+    public boolean enableMonthAnimation = true;
+
     CalendarViewDelegate(Context context, @Nullable AttributeSet attrs) {
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CalendarView);
 
@@ -576,6 +579,8 @@ public class CalendarViewDelegate {
                 CalendarUtil.dipToPx(context, 4));
         mYearViewMonthPaddingRight = (int) array.getDimension(R.styleable.CalendarView_year_view_month_padding_right,
                 CalendarUtil.dipToPx(context, 4));
+
+        enableMonthAnimation = array.getBoolean(R.styleable.CalendarView_enable_month_animation, enableMonthAnimation);
 
         if (mMinYear <= MIN_YEAR) mMinYear = MIN_YEAR;
         if (mMaxYear >= MAX_YEAR) mMaxYear = MAX_YEAR;

@@ -744,6 +744,9 @@ public final class MonthViewPager extends ViewPager {
             try {
                 Constructor constructor = mDelegate.getMonthViewClass().getConstructor(Context.class);
                 view = (BaseMonthView) constructor.newInstance(getContext());
+                if (view instanceof MonthView) {
+                    ((MonthView) view).enableAnim = mDelegate.enableMonthAnimation;
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 return new DefaultMonthView(getContext());

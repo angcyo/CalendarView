@@ -277,6 +277,8 @@ public abstract class MonthView extends BaseMonthView {
 
     protected MonthAnimHelper monthAnimHelper;
 
+    public boolean enableAnim = true;
+
     /**
      * 同月内,日的切换
      */
@@ -284,8 +286,10 @@ public abstract class MonthView extends BaseMonthView {
         if (monthAnimHelper != null) {
             monthAnimHelper.cancel();
         }
-        monthAnimHelper = new MonthAnimHelper();
-        monthAnimHelper.startAnim(this, from, to);
+        if (enableAnim) {
+            monthAnimHelper = new MonthAnimHelper();
+            monthAnimHelper.startAnim(this, from, to);
+        }
     }
 
     /**

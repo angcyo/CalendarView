@@ -122,6 +122,8 @@
             <enum name="last_select_day" value="1" />
             <enum name="last_select_day_ignore_current" value="2" />
         </attr>
+
+        <attr name="enable_month_animation" format="boolean" />
     </declare-styleable>
 
 
